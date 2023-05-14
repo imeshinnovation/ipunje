@@ -4,7 +4,11 @@
   "description": "Sistema para la Gestión de las Congraciones de IPUNJE Chile",
   "main": "src/app.js",
   "scripts": {
-    "dev": "nodemon --ext js,hbs,css,json --watch"
+    "dev": "nodemon --ext js,hbs,css,json --watch",
+    "start": "pm2 start src/index.js --name 'ipunje' --watch && pm2 save",
+    "status": "pm2 status --name 'ipunje",
+    "restart": "pm2 stop src/index.js --name 'ipunje' && pm2 start src/index.js --name 'ipunje' --watch && pm2 save",
+    "stop": "pm2 stop src/index.js --name 'ipunje' && pm2 del src/index.js --name 'ipunje' && pm2 save"
   },
   "keywords": [],
   "author": "iMesh - Software Factory",
