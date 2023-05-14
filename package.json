@@ -5,10 +5,10 @@
   "main": "src/app.js",
   "scripts": {
     "dev": "nodemon --ext js,hbs,css,json --watch",
-    "start": "pm2 start src/index.js --name 'ipunje' --watch && pm2 save",
+    "start": "pm2 start src/app.js --name 'ipunje' --watch && pm2 save",
     "status": "pm2 status --name 'ipunje",
-    "restart": "pm2 stop src/index.js --name 'ipunje' && pm2 start src/index.js --name 'ipunje' --watch && pm2 save",
-    "stop": "pm2 stop src/index.js --name 'ipunje' && pm2 del src/index.js --name 'ipunje' && pm2 save"
+    "restart": "pm2 stop src/app.js --name 'ipunje' && pm2 start src/app.js --name 'ipunje' --watch && pm2 save",
+    "stop": "pm2 stop src/app.js --name 'ipunje' && pm2 del src/app.js --name 'ipunje' && pm2 save"
   },
   "keywords": [],
   "author": "iMesh - Software Factory",
