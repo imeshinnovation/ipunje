@@ -4,8 +4,12 @@ const codes = require('../controllers/codes')
 const { EnviarCorreo } = require('../libs/helpers')
 
 Routes.get('/', async (req, res) => {
-    const user = await users.allusers()
-	res.render('index', { user })
+    if(req.user){
+        const user = await users.allusers()
+	    res.render('index', { user })
+    } else {
+        res.redirect('/login')
+    }
 })
 
 Routes.get('/login', async (req, res) => {

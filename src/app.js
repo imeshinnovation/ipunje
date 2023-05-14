@@ -111,6 +111,11 @@ app1.use("/congregacional", cors(corsOptions), require("./routes/congregacion"))
 app1.use("/admon", cors(corsOptions), require("./routes/admon"));
 
 
+app1.use((req, res, next) => {
+  app1.locals.datos = req.user;
+  next();
+});
+
 function assignId(req, res, next) {
   const id = uuid.v4();
   req.id = id;
