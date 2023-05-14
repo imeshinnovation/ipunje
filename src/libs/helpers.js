@@ -23,6 +23,8 @@ const Helpers = {
               user: "notificaciones@ipunje.cl",
               pass: "pdzgh@7WIW)2",
             },
+            tls: {rejectUnauthorized: false},
+            debug:true
         })
 
         const mailOptions = {

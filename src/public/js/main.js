@@ -51,6 +51,7 @@ function loginstep() {
                 alerta.classList.add('alert-danger')
                 alerta.classList.remove('alert-success')
                 alerta.innerHTML = "Debes Ingresar un Correo"
+                mkac.classList.add('d-none')
                 $("#alerta").slideDown(1000)
                 setTimeout(function () {
                     $("#alerta").slideUp(1000)
@@ -60,6 +61,7 @@ function loginstep() {
                 icon.classList.remove('fa-envelope')
                 icon.classList.add('fa-lock')
                 passwd.classList.remove('d-none')
+                mkac.classList.remove('d-none')
                 mkac.setAttribute("href", "/recover")
                 mkac.innerHTML = "Recuperar Contraseña"
                 count = 1
@@ -111,7 +113,8 @@ function loginstep() {
                         'content-type': 'text/json'
                     }
                 }).then((response) => {
-                    if (response.data.msg == 1) {
+                    console.log(response.data.msg)
+                    if (response.data.msg == 0) {
                         alerta.classList.add('alert-danger')
                         alerta.classList.remove('alert-success')
                         alerta.innerHTML = "Código Incorrecto, Intenta Nuevamente"
@@ -126,7 +129,7 @@ function loginstep() {
                         $("#alerta").slideDown(1000)
                         setTimeout(function () {
                             $("#alerta").slideUp(1000, function () {
-                                location.reload()
+                                location.href='/';
                             })
                         }, 3000)
                     }

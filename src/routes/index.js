@@ -3,14 +3,16 @@ const users = require('../controllers/users')
 const admins = require('../controllers/admins')
 const codes = require('../controllers/codes')
 const { EnviarCorreo } = require('../libs/helpers')
+const { createHmac } = require('node:crypto')
 
 const env = process.env
 const secret = env.TKEY
 
 Routes.get('/', async (req, res) => {
-    if(req.user){
+    if(req.session.user){
         const user = await users.allusers()
-	    res.render('index', { user })
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+	    res.render('index', { user, myuser })
     } else {
         res.redirect('/login')
     }
@@ -18,6 +20,7 @@ Routes.get('/', async (req, res) => {
 
 Routes.get('/login', async (req, res) => {
     const user = await admins.all()
+    console.log(req.session)
 	res.render('pages/login', { user })
 })
 
@@ -30,7 +33,12 @@ Routes.post('/login', async (req, res) => {
         .digest('hex')
         const user = await admins.byemail(email)
         if(prepass == user.password){
-            res.json({'msg': 1})
+            req.session.regenerate(function (err) {
+                if (err) next(err)
+                req.session.user = user._id
+                req.session.save()
+                res.json({'msg': 1})
+            })
         } else {
             res.json({'msg': 0})
         }

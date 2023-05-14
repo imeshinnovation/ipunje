@@ -25,12 +25,12 @@
   aria-labelledby="offcanvasWithBothOptionsLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title w-100 text-dark" id="offcanvasWithBothOptionsLabel">
-      <center><div class="photo"></div></center>
+      <center><img src="{{myuser.imagen64}}" class="photo"></center>
       <div class="row text-justify">
         <div class="col-md-12">
           <small class="small">
-            <i class="fas fa-user fa-fw me-2"></i>Contoso Impsun<br>
-            <i class="fas fa-envelope fa-fw me-2"></i>contoso@demo.me
+            <i class="fas fa-user fa-fw me-2"></i>{{myuser.names}}<br>
+            <i class="fas fa-envelope fa-fw me-2"></i>{{myuser.email}}
             <hr>
             <button class="btn btn-sm btn-danger float-end" data-bs-dismiss="offcanvas"><i class="fas fa-xmark fa-fw"></i></button>
             <button class="btn btn-sm btn-success float-start"><i class="fas fa-cogs fa-fw me-2"></i>Mi Perfil</button>

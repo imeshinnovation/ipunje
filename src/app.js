@@ -7,7 +7,7 @@ const uuid = require("uuid");
 const cors = require("cors");
 const { create } = require('express-handlebars');
 const path = require('path')
-
+const session = require('express-session')
 
 dotenv.config();
 const env = process.env;
@@ -38,6 +38,7 @@ const hbs = create({
   helpers: require('./libs/helpers'),
   extname: '.hbs'
 });
+
 
 app1.engine('.hbs', hbs.engine);
 app1.set('view engine', '.hbs');
@@ -82,6 +83,13 @@ app1.use(morgan(":id :method :url :response-time"));
 
 app1.use(express.static(__dirname + "/public"));
 
+app1.use(session({
+  secret: env.TKEY,
+  resave: true,
+  saveUninitialized: true
+}))
+
+
 app1.use("/css", express.static(path.join(__dirname + "../../node_modules/bootstrap/dist/css")));
 app1.use("/css", express.static(path.join(__dirname + "../../node_modules/leaflet/dist")));
 app1.use("/js", express.static(path.join(__dirname + "../../node_modules/jquery/dist")));
@@ -112,7 +120,9 @@ app1.use("/admon", cors(corsOptions), require("./routes/admon"));
 
 
 app1.use((req, res, next) => {
-  app1.locals.datos = req.user;
+  req.session.user = '';
+  req.session._garbage = Date();
+  req.session.touch();
   next();
 });
 
