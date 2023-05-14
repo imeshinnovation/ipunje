@@ -1,0 +1,12 @@
+<div class="card mt-2 border-0 w-100">
+    <div class="card-body">
+        <button class="btn btn-info w-100 mb-2 text-start" onclick="loadMember('members');"><i class="fas fa-table fa-fw ms-2 me-2"></i>Lista de Miembros</button>
+        <button class="btn btn-info w-100 mb-2 text-start"  onclick="loadMember('grupof');"><i class="fas fa-people-group fa-fw ms-2 me-2"></i>Grupos Familiares</button>
+    </div>
+</div>
+
+<script>
+    const loadMember = (page) => {
+        $("#memr").load('/congregacional/' + page ).fadeIn('500');
+    }
+</script>

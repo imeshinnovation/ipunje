@@ -1,0 +1,108 @@
+<nav class="navbar navbar-expand-lg bg-primary text-white mb-2">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/assets/logo_trans.png" width="100px">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active text-white" aria-current="page" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions"><i class="fas fa-list-ul fa-fw me-2"></i>Menú Principal</a>
+        </li>
+      </ul>  
+      <div class="d-flex">
+          <button class="btn btn-danger" onclick="location.href='/login'"><i class="fas fa-right-from-bracket fa-fw me-2"></i>Salir</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+  aria-labelledby="offcanvasWithBothOptionsLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title w-100 text-dark" id="offcanvasWithBothOptionsLabel">
+      <center><div class="photo"></div></center>
+      <div class="row text-justify">
+        <div class="col-md-12">
+          <small class="small">
+            <i class="fas fa-user fa-fw me-2"></i>Contoso Impsun<br>
+            <i class="fas fa-envelope fa-fw me-2"></i>contoso@demo.me
+            <hr>
+            <button class="btn btn-sm btn-danger float-end" data-bs-dismiss="offcanvas"><i class="fas fa-xmark fa-fw"></i></button>
+            <button class="btn btn-sm btn-success float-start"><i class="fas fa-cogs fa-fw me-2"></i>Mi Perfil</button>
+            
+          </small>
+        </div>
+      </div>
+      
+    </h5>
+  </div>
+  <div class="offcanvas-body">
+    <button type="button" class="btn btn-info w-100 mb-2" onclick="location.href='/';"><i class="fas fa-home fa-fw me-2"></i>Inicio</button>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            <i class="fas fa-menorah fa-fw me-2"></i>Congregacional
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body p-0 pt-2">
+            <button type="button" class="btn btn-primary w-100 mb-1" onclick="loadPage('/congregacional/sucursales');">Sucursales</button>
+            <button type="button" class="btn btn-primary w-100 mb-1" onclick="loadPage('/congregacional/membresia');">Membresía</button>
+            <button type="button" class="btn btn-primary w-100 mb-1" onclick="loadPage('/congregacional/amigos');">Amigos / Visitas</button>
+            <button type="button" class="btn btn-primary w-100 mb-1" onclick="loadPage('/congregacional/inventario');">Inventario Activos</button>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+            <i class="fas fa-hand-holding-dollar fa-fw me-2"></i>Financiero
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body p-0 pt-2">
+            <button type="button" class="btn btn-primary w-100 mb-1">Cuentas Contables</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Registro de Productos</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Agenda</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Traspaso</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Créditos</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Cierre y Apertura</button>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+            <i class="fas fa-file-contract fa-fw me-2"></i>Informes
+          </button>
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+          data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body p-0 pt-2">
+            <button type="button" class="btn btn-primary w-100 mb-1">Eclesiasticos</button>
+            <button type="button" class="btn btn-primary w-100 mb-1">Financieros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+<button type="button" class="btn btn-dark w-100 mb-2" onclick="location.href='/admon/';"><i class="fas fa-cog fa-fw me-2"></i>Administración</button>
+  </div>
+</div>
+
+<script>
+  const loadPage = (page) => {
+    location.href=page;
+  }
+</script>

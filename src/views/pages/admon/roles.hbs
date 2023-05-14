@@ -1,0 +1,38 @@
+<div id="tbar">
+    <button class="btn btn-success shadow-sm" onclick="$('#mainadmon').load('/admon/addmember').fadeIn('500');"><i
+            class="fas fa-plus fa-fw me-2"></i>Agregar Roll</button>
+</div>
+
+<table data-toggle="table" data-search="true" data-filter-control="true" data-show-export="false"
+    data-click-to-select="true" data-toolbar="#tbar" data-page-list="[50, 100, 200, All]" width="100%" id="table"
+    class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+    <thead class="table-primary">
+        <tr>
+            <th data-field="nombres" data-sortable="true">Roll</th>
+            <th data-field="apellidos" data-sortable="true">Descripción</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each roles}}
+        <tr>
+            <td>{{roll}}</td>
+            <td>{{description}}</td>
+            <td>
+                <div class="btn-group w-100">
+                    <button class="btn btn-sm btn-info"
+                        onclick="$('#mainadmon').load('/admon/viewmember/{{_id}}').fadeIn('500')" data-toggle="tooltip" data-placement="top" title="Ver Usuario"><i
+                            class="fas fa-eye fa-fw"></i></button>
+                    <button class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top" title="Editar Usuario"><i
+                            class="fas fa-edit fa-fw"></i></button>
+                    <button class="btn btn-sm btn-danger" id="btn3" data-toggle="tooltip" data-placement="top" title="Eliminar Usuario" onblur="butDispose()" ><i class="fas fa-trash fa-fw"></i></button>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
+
+{{>end}}
