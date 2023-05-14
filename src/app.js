@@ -8,6 +8,7 @@ const cors = require("cors");
 const { create } = require('express-handlebars');
 const path = require('path')
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 
 dotenv.config();
 const env = process.env;
@@ -29,6 +30,8 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
 
 const { white } = require('./libs/loadmodels');
 
@@ -85,8 +88,12 @@ app1.use(express.static(__dirname + "/public"));
 
 app1.use(session({
   secret: env.TKEY,
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: MONGODB_URL,
+    touchAfter: 24 * 3600
+  })
 }))
 
 

@@ -2,8 +2,8 @@
   "name": "IpunSoft",
   "short_name": "IpunSoft",
   "start_url": "https://ipunsoft.ipunje.cl/",
-  "theme_color": "#3B71CA",
-  "background_color": "#3B71CA",
+  "theme_color": "#467FD0",
+  "background_color": "#467FD0",
   "description": "Web Application",
   "icons": [
     {
