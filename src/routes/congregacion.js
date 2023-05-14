@@ -59,7 +59,8 @@ Routes.get('/sucursales', async (req, res) => {
 Routes.get('/addsucursal', async (req, res) => {
     if(req.session.user){
         const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
-        res.render('pages/congregacional/addsucursal', myuser)
+        const pastores = await admins.all()
+        res.render('pages/congregacional/addsucursal', { myuser, pastores })
     } else {
         res.redirect('/login')
     }
