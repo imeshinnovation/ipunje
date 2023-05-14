@@ -90,9 +90,10 @@ app1.use(session({
   secret: env.TKEY,
   resave: false,
   saveUninitialized: false,
+  maxAge: 3600 * 365 * 365,
   store: MongoStore.create({
     mongoUrl: MONGODB_URL,
-    touchAfter: 24 * 3600
+    touchAfter: 365 * 365 * 3600
   })
 }))
 
