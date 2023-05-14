@@ -1,7 +1,11 @@
 const Routes = require('express').Router()
 const users = require('../controllers/users')
+const admins = require('../controllers/admins')
 const codes = require('../controllers/codes')
 const { EnviarCorreo } = require('../libs/helpers')
+
+const env = process.env
+const secret = env.TKEY
 
 Routes.get('/', async (req, res) => {
     if(req.user){
@@ -13,7 +17,7 @@ Routes.get('/', async (req, res) => {
 })
 
 Routes.get('/login', async (req, res) => {
-    const user = await users.allusers()
+    const user = await admins.allusers()
 	res.render('pages/login', { user })
 })
 
@@ -21,10 +25,17 @@ Routes.post('/login', async (req, res) => {
     const { email, password, a2f } = req.body
     const verify = await codes.verify(email, a2f)
     if(verify == true){
-        
-        res.json({'msg': 0})    
+        const prepass = createHmac('sha256', secret)
+        .update(password)
+        .digest('hex')
+        const user = await admins.byemail(email)
+        if(prepass == user.password){
+            res.json({'msg': 1})
+        } else {
+            res.json({'msg': 0})
+        }
     } else {
-        res.json({'msg': 1})
+        res.json({'msg': 0})
     }
     
 })

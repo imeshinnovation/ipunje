@@ -13,6 +13,10 @@ module.exports = {
         const oneus = await admins.findOne({_id: id})
         return oneus
     },
+    byemail: async (mail) => {
+        const oneus = await admins.findOne({email: mail})
+        return oneus
+    },
     verifymail: async (mail) => {
         const yer = await admins.findOne({email: mail})
         return yer
