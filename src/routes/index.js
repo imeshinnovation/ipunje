@@ -17,7 +17,7 @@ Routes.get('/', async (req, res) => {
 })
 
 Routes.get('/login', async (req, res) => {
-    const user = await admins.allusers()
+    const user = await admins.all()
 	res.render('pages/login', { user })
 })
 
@@ -42,7 +42,7 @@ Routes.post('/login', async (req, res) => {
 
 Routes.post('/sendcode', async (req, res) => {
     const { mail } = req.body
-    const prev = await users.verifymail(mail)
+    const prev = await admins.verifymail(mail)
     if(prev !== null){
         const code = Math.floor(Math.random() * 1000000) +1
         await codes.add(mail, code)
