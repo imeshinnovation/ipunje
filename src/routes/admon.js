@@ -60,6 +60,7 @@ Routes.post('/addmember', async (req, res) => {
     }
 })
 
+
 Routes.get('/viewmember/:id?', async (req, res) => {
     if(req.session.user){
         const adder = JSON.parse(JSON.stringify(await admins.one(req.params.id)))

@@ -31,6 +31,7 @@ Routes.post('/login', async (req, res) => {
         const prepass = createHmac('sha256', secret)
         .update(password)
         .digest('hex')
+        console.log('Clave Digitada: ',prepass)
         const user = await admins.byemail(email)
         if(prepass == user.password){
             req.session.regenerate(function (err) {

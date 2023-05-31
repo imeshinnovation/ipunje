@@ -117,7 +117,7 @@ function loginstep() {
                     if (response.data.msg == 0) {
                         alerta.classList.add('alert-danger')
                         alerta.classList.remove('alert-success')
-                        alerta.innerHTML = "Código Incorrecto, Intenta Nuevamente"
+                        alerta.innerHTML = "Credenciales Incorrectas, Intenta Nuevamente"
                         $("#alerta").slideDown(1000)
                         setTimeout(function () {
                             $("#alerta").slideUp(1000)
