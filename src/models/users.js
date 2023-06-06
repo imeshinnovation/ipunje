@@ -14,30 +14,20 @@ const userSchema = new Schema({
     gender: { type: String },
     address: { type: String },
     phonenumber: { type: String },
-    civilstatus: [{
-        status: { type: String },
-        namespouse: { type: String },
-        numberchildren: { type: Number }
-    }],
+    grpfamily: { type: String },
+    civilstatus: { type: String },
+    placefamily: { type: String },
     scholarship: { type: String },
     occupation: { type: String },
     datewaterbaptism: { type: String },
     citybaptism: { type: String },
     shepherdbaptism: { type: String },
     holyspirit: { type: String },
-    dateholyspirit: { type: String },
     positionsheld: { type: String },
     howmeetlord: { type: String },
     addnote: { type: String },
-    photo:
-    {
-        filename: String,
-        contentType: String
-    },
+    photo: { type: String },
     email: { type: String, unique: true }, 
-    password: { type: String },
-    roll: { type: Number },
-    status: { type: Number, default: 0 },
     date_record: { type: String }
 })
 

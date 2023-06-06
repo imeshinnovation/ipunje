@@ -1,7 +1,9 @@
 const Routes = require('express').Router()
 const users = require('../controllers/users')
 const admins = require('../controllers/admins')
+const path = require('path')
 const codes = require('../controllers/codes')
+const csv = require('csvtojson')
 const { EnviarCorreo } = require('../libs/helpers')
 
 const sucursal = require('../controllers/sucursal')
@@ -11,6 +13,18 @@ Routes.get('/membresia', async (req, res) => {
         const user = await users.allusers()
         const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
 	    res.render('pages/congregacional/membresia', { user, myuser })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/addmember', async (req, res) => {
+    if(req.session.user){
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        console.log(path.join(__dirname + '../../libs/paises.csv'))
+        const paises = await csv().fromFile(path.join(__dirname + '../../libs/paises.csv'))
+        res.render('pages/congregacional/addmember', { user, myuser, paises })
     } else {
         res.redirect('/login')
     }
