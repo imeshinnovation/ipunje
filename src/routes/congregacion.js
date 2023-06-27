@@ -22,9 +22,29 @@ Routes.get('/addmember', async (req, res) => {
     if(req.session.user){
         const user = await users.allusers()
         const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const sucursales = await sucursal.allsucursales()
         console.log(path.join(__dirname + '../../libs/paises.csv'))
         const paises = await csv().fromFile(path.join(__dirname + '../../libs/paises.csv'))
-        res.render('pages/congregacional/addmember', { user, myuser, paises })
+        res.render('pages/congregacional/addmember', { user, myuser, paises, sucursales })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/addmembresia', async (req, res) => {
+    if(req.session.user){
+        const adu = users.addmember(req.body)
+        console.log(adu)
+        res.redirect("/congregacional/membresia")
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/viewmember/:id?', async (req, res) => {
+    if(req.session.user){
+        const adder = JSON.parse(JSON.stringify(await users.oneuser(req.params.id)))
+        res.render('pages/congregacional/viewmember', { layout: false, adder })
     } else {
         res.redirect('/login')
     }

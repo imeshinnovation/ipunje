@@ -199,6 +199,18 @@
                                     <input type="date" name="holyspirit" id="holyspirit" class="form-control">
                                 </div>
                             </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-building fa-fw me-2"></i>
+                                    Congregación Actual</div>
+                                    <select name="congregation" id="congregation" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        {{#each sucursales}}
+                                        <option value="{{nombre_sucursal}}">{{nombre_sucursal}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-md-6 mb-3">
                                 <div class="card">
                                     <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Cargos Desempeñados</div>

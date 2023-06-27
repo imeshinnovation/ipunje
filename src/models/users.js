@@ -18,6 +18,7 @@ const userSchema = new Schema({
     civilstatus: { type: String },
     placefamily: { type: String },
     scholarship: { type: String },
+    congregation: { type: String },
     occupation: { type: String },
     datewaterbaptism: { type: String },
     citybaptism: { type: String },

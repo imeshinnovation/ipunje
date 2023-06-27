@@ -12,7 +12,8 @@ Routes.get('/', async (req, res) => {
     if(req.session.user){
         const user = await users.allusers()
         const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
-	    res.render('index', { user, myuser })
+        const member = await users.count()
+	    res.render('index', { user, myuser, member })
     } else {
         res.redirect('/login')
     }

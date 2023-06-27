@@ -17,21 +17,46 @@
         </tr>
     </thead>
     <tbody>
+        {{#each user}}
         <tr>
-            <td>Alexander</td>
-            <td>Rubio Cáceres</td>
-            <td>ceo@imesh.app</td>
-            <td>Pudahuel</td>
+            <td>{{names}}</td>
+            <td>{{lastnames}}</td>
+            <td>{{email}}</td>
+            <td>{{congregation}}</td>
             <td>
                 <div class="btn-group w-100">
-                <button class="btn btn-sm btn-info"><i class="fas fa-eye fa-fw"></i></button>
-                <button class="btn btn-sm btn-danger"><i class="fas fa-trash fa-fw"></i></button>
+                <button class="btn btn-sm btn-info" onclick="viewer('{{_id}}');"><i class="fas fa-eye fa-fw"></i></button>
+                <button class="btn btn-sm btn-danger" onclick="openModal('{{_id}}');"><i class="fas fa-trash fa-fw"></i></button>
                 </div>
             </td>
         </tr>
+        {{/each}}
     </tbody>
 </table>
 
+<script>
+
+    function viewer(id){
+        $("#memr").load('/congregacional/viewmember/' + id).fadeIn('500');
+    }
+    const openModal = (id) => {
+        bodyDelUser()
+        $("#mainModal").modal("show")
+    }
+
+    const bodyDelUser = (id) => {
+        $("#modalTitle").html("Eliminar Registro")
+        $("#modalBody").html(`Esta Seguro de Eliminar este Registro?<br><br><div class="btn-group"><button class="btn btn-danger">Sí</button><button class="btn btn-info" onclick="cancelModal();">No</button></div>`)
+    }
+
+    const deluser = (id) => {
+        console.log(id)
+    }
+
+    const cancelModal = () => {
+        $("#mainModal").modal("hide")
+    }
+</script>
 
 
 {{>end}}
