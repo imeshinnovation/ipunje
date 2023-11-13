@@ -1,0 +1,347 @@
+    <div class="card mb-4">
+        <div class="card-header">Formulario de Registro para Membresía</div>
+        <div class="card-body bg-white">
+            <div class="card mt-2 border-0">
+                <div class="card-body p-0">
+                    <form method="post" action="/congregacional/addmembresia" autocomplete="off" id="formulario" onsubmit="return validaForm(event);">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-sign fa-fw me-2"></i>Nombres</div>
+                                    <input type="text" name="names" id="names" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-sign fa-fw me-2"></i>Apellidos
+                                    </div>
+                                    <input type="text" name="lastnames" id="lastnames" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-address-card fa-fw me-2"></i>Tipo
+                                        Documento
+                                    </div>
+                                    <select name="typedoc" id="typedoc" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Pasaporte">Pasaporte</option>
+                                        <option value="RUT">RUT</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Número
+                                        Documento</div>
+                                    <input type="text" name="numdoc" id="numdoc" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i
+                                            class="fas fa-font-awesome fa-fw me-2"></i>Nacionalidad</div>
+                                    <select class="form-select" name="nationality" id="nationality">
+                                        <option value="">Seleccione...</option>
+                                        {{#each paises}}
+                                        <option value="{{nombre}}">{{nombre}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-tree-city fa-fw me-2"></i>Ciudad de
+                                        Nacimiento</div>
+                                    <input type="text" name="placeofbirth" id="placeofbirth" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Fecha de
+                                        Nacimiento</div>
+                                    <input type="date" name="dateofbirth" id="dateofbirth" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-venus-mars fa-fw me-2"></i>Genero
+                                    </div>
+                                    <select name="gender" id="gender" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Hombre">Hombre</option>
+                                        <option value="Mujer">Mujer</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-location fa-fw me-2"></i>Dirección
+                                    </div>
+                                    <input type="text" name="address" id="address" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</div>
+                                    <input type="number" name="phonenumber" id="phonenumber" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-envelope fa-fw me-2"></i>Email</div>
+                                    <input type="email" name="email" id="email" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-ring fa-fw me-2"></i>Estado
+                                        Civil
+                                    </div>
+                                    <select name="civilstatus" id="civilstatus" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Soltero(a)">Soltero(a)</option>
+                                        <option value="Casado(a)">Casado(a)</option>
+                                        <option value="Viudo(a)">Viudo(a)</option>
+                                        <option value="Divorciado(a)">Divorciado(a)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-people-roof fa-fw me-2"></i>Grupo
+                                        Familiar
+                                    </div>
+                                    <select name="id_family" id="id_family" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        {{#each family_all}}
+                                        <option value="{{_id}}">{{name_family}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-people-group fa-fw me-2"></i>Lugar en
+                                        la Familia
+                                    </div>
+                                    <select name="placefamily" id="placefamily" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Padre">Padre</option>
+                                        <option value="Madre">Madre</option>
+                                        <option value="Hijo(a)">Hijo(a)</option>
+                                        <option value="Hijo(a)">Sobrino(a)</option>
+                                        <option value="Hijo(a)">Primo(a)</option>
+                                        <option value="Hermano(a)">Hermano(a)</option>
+                                        <option value="Abuelo(a)">Abuelo(a)</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-graduation-cap fa-fw me-2"></i>Nivel
+                                        Educación
+                                    </div>
+                                    <select name="scholarship" id="scholarship" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Pre-Escolar">Pre-Escolar</option>
+                                        <option value="Enseñanza Básica">Enseñanza Básica</option>
+                                        <option value="Enseñanza Media">Enseñanza Media</option>
+                                        <option value="Educación Superior">Educación Superior</option>
+                                        <option value="Post-Titulos">Post-Titulos</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-person-digging fa-fw me-2"></i>Ocupación</div>
+                                    <select name="occupation" id="occupation" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        <option value="Empleado">Empleado</option>
+                                        <option value="Independiente">Independiente</option>
+                                        <option value="Hogar">Hogar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-calendar-days fa-fw me-2"></i>Fecha Bautismo
+                                    </div>
+                                    <input type="date" name="datewaterbaptism" id="datewaterbaptism" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-building-circle-check fa-fw me-2"></i>Ciudad Bautismo
+                                    </div>
+                                    <input type="text" name="citybaptism" id="citybaptism" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-person-praying fa-fw me-2"></i>Pastor del
+                                        Bautismo</div>
+                                    <input type="text" name="sheperdbaptism" id="sheperdbaptism" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-fire fa-fw me-2"></i>Recepción
+                                        Espíritu Santo</div>
+                                    <input type="date" name="holyspirit" id="holyspirit" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-building fa-fw me-2"></i>
+                                    Congregación Actual</div>
+                                    <select name="congregation" id="congregation" class="form-select">
+                                        <option value="">Seleccione...</option>
+                                        {{#each sucursales}}
+                                        <option value="{{nombre_sucursal}}">{{nombre_sucursal}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Cargos Desempeñados</div>
+                                    <div class="card-body p-0">
+                                        <textarea class="form-control" name="positionsheld" id="positionheld" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Como Conoció al Señor</div>
+                                    <div class="card-body p-0">
+                                        <textarea class="form-control" name="howmeetlord" id="howmeetlord" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="card">
+                                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Notas Eventuales</div>
+                                    <div class="card-body p-0">
+                                        <textarea class="form-control" name="addnote" id="addnote" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <div class="card mb-2">
+                                    <div class="card-header d-flex">
+                                        <div class="me-4">
+                                            <h3>Registro Fotográfico</h3>
+                                        </div>
+                                        <div class="btn-group d-flex justify-content-end">
+                                            <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                                    class="fas fa-camera fa-fw"></i></button>
+                                            <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                                    class="fas fa-trash fa-fw"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body p-0 m-0 text-center">
+                                        <input class="d-none" type="file" id="formFile" onchange="preview()">
+                                        <img id="frame" src="" class="img-fluid" />
+                                        <input type="hidden" name="image64" id="image64">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="btn btn-success shadow-sm" type="submit"><i
+                                        class="fas fa-save fa-fw me-2"></i>Guardar Registro</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    function validaForm(evento) {
+        var msg = "";
+        if ($("#names").val() == "") {
+            msg = "Debes Ingresar los Nombres";
+            $("#names").focus();
+            sendAlert(msg, evento);
+        } else if ($("#lastnames").val() == "") {
+            msg = "Debes Ingresar los Apellidos";
+            $("#lastnames").focus();
+            sendAlert(msg, evento);
+        } else if ($("#typedoc").val() == "") {
+            msg = "Debes Seleccionar el tipo de Documento";
+            $("#typedoc").focus();
+            sendAlert(msg, evento);
+        } else if ($("#numdoc").val() == "") {
+            msg = "Debes Ingresar el Número del Documento";
+            $("#numdoc").focus();
+            sendAlert(msg, evento);
+        } else if ($("#nationality").val() == "") {
+            msg = "Debes Seleccionar tu País de Origen";
+            $("#nationality").focus();
+            sendAlert(msg, evento);
+        } else if ($("#placeofbirth").val() == "") {
+            msg = "Debes Ingresar la Ciudad donde Naciste";
+            $("#placeofbirth").focus();
+            sendAlert(msg, evento);
+        } else if ($("#dateofbirth").val() == "") {
+            msg = "Debes Ingresar la Fecha de Nacimiento";
+            $("#dateofbirth").focus();
+            sendAlert(msg, evento);
+        } else if ($("#gender").val() == "") {
+            msg = "Debes Seleccionar el Género";
+            $("#gender").focus();
+            sendAlert(msg, evento);
+        } else if ($("#address").val() == "") {
+            msg = "Debes Ingresar la Dirección";
+            $("#address").focus();
+            sendAlert(msg, evento);
+        } else if ($("#phonenumber").val() == "") {
+            msg = "Debes Ingresar el Número de Teléfono";
+            $("#phonenumber").focus();
+            sendAlert(msg, evento);
+        } else if ($("#email").val() == "") {
+            msg = "Debes Ingresar el Correo Electrónico";
+            $("#email").focus();
+            sendAlert(msg, evento);
+        } else if ($("#civilstatus").val() == "") {
+            msg = "Debes Seleccionar el Estado Civil";
+            $("#civilstatus").focus();
+            sendAlert(msg, evento);
+        } else if ($("#grpfamily").val() == "") {
+            msg = "Debes Seleccionar el Grupo Familiar";
+            $("#grpfamily").focus();
+            sendAlert(msg, evento);
+        } else if ($("#placefamily").val() == "") {
+            msg = "Debes Seleccionar el Lugar que Ocupas en la Familia";
+            $("#placefamily").focus();
+            sendAlert(msg, evento);
+        } else if ($("#scholarship").val() == "") {
+            msg = "Debes Seleccionar el Nivel de Educacion";
+            $("#scholarship").focus();
+            sendAlert(msg, evento);
+        } else if ($("#occupation").val() == "") {
+            msg = "Debes Seleccionar la Ocupación";
+            $("#occupation").focus();
+            sendAlert(msg, evento);
+        } else if ($("#formFile").val() == "") {
+            msg = "Debes Carga la Fotografía de Perfíl";
+            $("#formFile").focus();
+            sendAlert(msg, evento);
+        } else {
+            return true;
+        }
+
+    }
+    
+    document.getElementById("formFile").addEventListener("change", (e) => {
+        uploadImage(e);
+    })
+</script>

@@ -1,0 +1,55 @@
+{{>tables}}
+
+<div id="tbar">
+    <button class="btn btn-secondary shadow-sm" onclick="loadContent('maincuentas','/financiero/addpcuenta');"><i
+            class="fas fa-plus fa-fw me-2"></i>Agregar Producto</button>
+</div>
+
+<table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true" data-search="true"
+    data-show-jump-to="true" data-page-size='10' data-show-export="true" data-export-types="['csv','']"
+    data-toolbar="#toolbar"
+    class="table table-striped table-bordered table-sm" data-page-list="[50, 100, 200, All]" width="100%" id="dtable"
+    class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th data-field="Nivel" data-sortable="true">Código / Nombre</th>
+            <th data-field="Cuenta" data-sortable="true">Descripción</th>
+            <th data-field="Activo" data-sortable="true">Activo</th>
+            <th data-field="Pasivo" data-sortable="true">Pasivo</th>
+            <th data-field="Cuenta Activo" data-sortable="true">Cuenta Activo</th>
+            <th data-field="Cuenta Pasivo" data-sortable="true">Cuenta Pasivo</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each cuentas}}
+        <tr>
+            <td>{{code_name}}</td>
+            <td>{{description}}</td>
+            <td>{{#if (eq activo 1)}}Si{{else}}No{{/if}}</td>
+            <td>{{#if (eq pasivo 1)}}Si{{else}}No{{/if}}</td>
+            <td>{{cuenta_activo}}</td>
+            <td>{{cuenta_pasivo}}</td>
+            <td>
+                <div class="btn-group btn-secondary shadow-sm w-100">
+                    <button class="btn btn-sm btn-light"
+                        onclick="delDialog('{{_id}}', '{{code_name}}', 'remProd', 'Eliminar Producto')"
+                        title="Eliminar Producto"><i class="fas fa-trash fa-fw"></i></button>
+                    <button class="btn btn-sm btn-light" onclick="loadContent('maincuentas','/financiero/addpcuenta/{{_id}}');" title="Editar Producto">
+                        <i class="fas fa-edit fa-fw"></i>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{>end}}
+
+<!--
+Andres Rincon Gerente Proyectos COLSOF
+Johana Diaz y Wilson (Comunicaciones) son de TI Banco
+
+Pondremos un Canal
+-->

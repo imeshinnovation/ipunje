@@ -1,0 +1,21 @@
+{
+  "name": "IpunSoft",
+  "short_name": "IpunSoft",
+  "start_url": "/",
+  "theme_color": "#467FD0",
+  "background_color": "#467FD0",
+  "description": "Web Application",
+  "icons": [
+    {
+      "src": "/favicon/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/favicon/favicon-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    }
+  ],
+  "display": "standalone"
+}

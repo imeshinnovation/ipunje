@@ -1,0 +1,48 @@
+{{>navbar}}
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Financiero</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow mb-3">
+        <div class="card-header">Diezmos</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body">
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('maindiezmos','/financiero/ddash');"><i
+                                    class="fas fa-landmark fa-fw me-2"></i>DashBoard</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('maindiezmos','/financiero/regdiezmos');"><i
+                                    class="fas fa-handshake fa-fw me-2"></i>Registro Diezmos</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('maindiezmos','/financiero/regaportes');"><i
+                                    class="fas fa-link fa-fw me-2"></i>Aportes</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body p-1" id="maindiezmos"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#maindiezmos").load('/financiero/ddash').fadeIn('500');
+    });
+</script>

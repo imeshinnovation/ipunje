@@ -1,0 +1,80 @@
+Vista del Usuario
+<hr>
+<div class="row">
+    <div class="col-md-6 mb-2">
+        <div class="card mb-2">
+            <div class="card-header d-flex">
+                <div class="me-4">
+                    <h3>Foto de Perfíl</h3>
+                </div>
+            </div>
+            <div class="card-body p-0 m-0">
+                <img id="frame" src="{{adder.imagen64}}" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-2">
+        <div class="row">
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" id="names" class="form-control" placeholder="Nombres" value="{{adder.names}}"
+                        readonly>
+                    <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Nombres</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" id="lastnames" class="form-control" placeholder="Apellidos"
+                        value="{{adder.lastnames}}" readonly>
+                    <label for="lastnames"><i class="fas fa-signature fa-fw me-2"></i>Apellidos</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" id="rut" class="form-control" placeholder="Rut" value="{{adder.rut}}" readonly>
+                    <label for="rut"><i class="fas fa-address-card fa-fw me-2"></i>Rut</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" class="form-control" placeholder="phonenumber" id="phonenumber"
+                        value="{{adder.phonenumber}}" readonly>
+                    <label for="phonenumber"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="email" placeholder="Email" value="{{adder.email}}"
+                        readonly>
+                    <label for="email"><i class="fas fa-envelope fa-fw me-2"></i>Email</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="licencia" placeholder="Licencia"
+                        value="{{adder.licencia}}" readonly>
+                    <label for="licencia"><i class="fas fa-graduation-cap fa-fw me-2"></i>Licencia</label>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="form-floating">
+                    <input type="text" class="form-control" id="roll" placeholder="Privilegios"
+                        value="" readonly>
+                    <label for="licencia"><i class="fas fa-graduation-cap fa-fw me-2"></i>Privilegios</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        const uri = window.location + 'roll/{{adder.roll}}'
+        console.log(uri)
+
+        axios.get(uri).then(function(res){
+            $("#roll").val(res.data.roll)
+        })
+        
+    })
+</script>

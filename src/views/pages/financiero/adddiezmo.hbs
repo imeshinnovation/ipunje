@@ -1,0 +1,28 @@
+{{>tables}}
+
+<div class="card">
+    <div class="card-header">Nuevo Documento de Diezmos</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="form-floating">
+                    <input type="date" name="fecha" id="fecha" class="form-control" autocomplete="off">
+                    <label for="fecha"><i class="fas fa-signature fa-fw me-2"></i>Fecha Registro</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    var today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+    $('#fecha').val(today);
+    alert('Aqui estoy')
+    ​
+
+</script>
+
+{{>end}}

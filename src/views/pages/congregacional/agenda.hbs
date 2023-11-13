@@ -1,0 +1,47 @@
+{{>navbar}}
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Financiero</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow mb-3">
+        <div class="card-header">Agenda</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body">
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainagenda','/congregacional/agendap');"><i
+                                    class="fas fa-user fa-fw me-2"></i>Personal</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainagenda','/congregacional/agendag');"><i
+                                    class="fas fa-users fa-fw me-2"></i>General</button>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body p-1" id="mainagenda"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#mainagenda").load('/congregacional/agendap').fadeIn('500');
+    });
+</script>

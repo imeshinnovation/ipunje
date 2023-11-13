@@ -1,0 +1,31 @@
+
+<div class="card">
+    <div class="card-header">Agregar Nuevo Cargo Oficial</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="names" id="names" class="form-control" placeholder="Nombre del Oficial" autocomplete="off">
+                    <label for="names"><i class="fas fa-signature fa-fw me-2"></i>Nombre del Oficial</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo Oficial" autocomplete="off">
+                    <label for="cargo"><i class="fas fa-signature fa-fw me-2"></i>Cargo Oficial</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="rut" id="rut" class="form-control" placeholder="RUT" autocomplete="off">
+                    <label for="rut"><i class="fas fa-signature fa-fw me-2"></i>RUT</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="addOficial();"><i class="fas fa-save me-2"></i>Guardar Cambios</button>
+    </div>
+</div>
+
+{{>end}}

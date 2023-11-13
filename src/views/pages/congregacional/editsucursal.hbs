@@ -1,0 +1,98 @@
+{{>navbar}}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/congregacional/sucursales">Sucursales</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Editar Sucursal</li>
+            </ol>
+        </nav>
+
+    <div class="card shadow bg-white mt-4">
+        <div class="card-body">
+            <div class="card border-0 p-0 mt-2">
+                <div class="card-body p-0">
+                    <form method="post" action="/congregacional/updsucursal">
+                        <input type="hidden" name="id" value="{{adder._id}}">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i
+                                            class="fas fa-place-of-worship fa-fw me-2"></i>Nombre Sucursal</div>
+                                    <input type="text" name="nombre_sucursal" class="form-control" value="{{adder.nombre_sucursal}}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-person-praying fa-fw me-2"></i>Pastor
+                                    </div>
+                                    <select class="form-select" name="pastor" required>
+                                        <option value="">Seleccione un Pastor</option>
+                                        {{#each pastores}}
+                                            <option value="{{names}} {{lastnames}}" {{#if (eq ../adder.pastor (fulln names lastnames) )}}selected{{/if}}>{{fulln names lastnames}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-map-pin fa-fw me-2"></i>Dirección
+                                    </div>
+                                    <input type="text" name="direccion" id="direccion" value="{{adder.direccion}}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</div>
+                                    <input type="text" name="telefono" value="{{adder.telefono}}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="input-group shadow-sm">
+                                    <div class="input-group-text"><i class="fas fa-font-awesome fa-fw me-2"></i>Tipo
+                                        Sucursal</div>
+                                    <select class="form-select" name="tipo_sucursal" required>
+                                        <option value="">Seleccione...</option>
+                                        <option value="local" {{#if (eq adder.tipo_sucursal 'local')}}selected{{/if}}>Local</option>
+                                        <option value="nacional" {{#if (eq adder.tipo_sucursal 'nacional')}}selected{{/if}}>Nacional</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="card shadow-sm mb-3">
+                                    <div class="card-header">
+                                        <i class="fas fa-map fa-fw me-2"></i>Geo Referenciación
+                                        <div class="float-end">
+                                            <button type="button" class="btn btn-sm btn-dark" onclick="getLocation();"><i class="fas fa-robot me-2"></i>GeoBot</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-text"><i
+                                                            class="fas fa-location-dot fa-fw me-2"></i>Latitud</div>
+                                                    <input type="text" name="latitud" id="latitud" value="{{adder.latitud}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="input-group">
+                                                    <div class="input-group-text"><i
+                                                            class="fas fa-location-pin fa-fw me-2"></i>Longitud</div>
+                                                    <input type="text" name="longitud" id="longitud" value="{{adder.longitud}}" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-success shadow-sm" type="submit"><i
+                                        class="fas fa-save fa-fw me-2"></i>Guardar Sucursal</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

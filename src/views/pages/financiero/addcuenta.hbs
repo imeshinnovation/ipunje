@@ -1,0 +1,79 @@
+{{>tables}}
+
+<div class="card">
+    <div class="card-header">Agregar Cuenta Contable</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 mb-2">
+                <div class="form-floating">
+                    <select name="nivel" id="nivel" class="form-select">
+                        <option value="">Selecciona una Opción</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <label for="nivel">Nivel de la Cuenta</label>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="cuenta" id="cuenta" class="form-control" placeholder="Cuenta" autocomplete="off" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                    <label for="cuenta"><i class="fas fa-signature fa-fw me-2"></i>Cuenta</label>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la Cuenta" autocomplete="off">
+                    <label for="nombre"><i class="fas fa-signature fa-fw me-2"></i>Nombre</label>
+                </div>
+            </div>
+        </div>    
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="saveAccount();">Crear Cuenta Contable</button>
+    </div>
+</div>
+
+<script>
+    
+    async function saveAccount(){
+        if ($("#nivel").val() == "") {
+            msg = "Debes Seleccionar un Nivel";
+            $("#nivel").focus();
+            sendAlert(msg);
+        } else if($("#cuenta").val() == ""){
+            msg = "Debes Escribir una Cuenta";
+            $("#cuenta").focus();
+            sendAlert(msg);
+        } else if($("#nombre").val() == ""){
+            msg = "Debes Escribir el Nombre";
+            $("#nombre").focus();
+            sendAlert(msg);
+        } else {
+            const nivel = $("#nivel").val();
+            const cuenta = $("#cuenta").val();
+            const nombre = $("#nombre").val();
+            const datos = {
+                nivel,
+                cuenta,
+                nombre
+            }
+            await axios.post('/financiero/addcuenta', datos).then((response) => {
+                console.log(response);
+                loadContent('maincuentas','/financiero/cuentas');
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    }
+</script>
+
+
+{{>end}}

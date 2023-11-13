@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="ipunsoft">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#467FD0">
+    <link rel="icon" href="/favicon/favicon.ico">
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png">
+    <link rel="apple-touch-icon-precomposed" href="/favicon/apple-touch-icon.png">
+    <link rel="mask-icon" sizes="any" href="/favicon/favicon-32x32.png" color="#467FD0">
+    <link rel="manifest" href="/app.manifiest">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/leaflet.css">
+    <link rel="stylesheet" href="/css/bootstrap-table.css">
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+
+    <!--    <script src="/js/bootstrap-table.js"></script>
+    <script src="/js/extensions/mobile/bootstrap-table-mobile.min.js"></script>
+    <script src="/js/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="/js/locale/bootstrap-table-es-MX.js"></script> -->
+
+
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/apexcharts.min.js"></script>
+    <script src="/js/leaflet.js"></script>
+    <script src="/js/main.js"></script>
+    <title>IPUNSOFT</title>
+</head>
+
+<body>
+    <div class="alert alert-danger text-center rounded-0 shadow fixed-top" style="display: none; z-index: 10000;"
+        role="alert" id="alerta"></div>
+    <div class="preloader">
+        <div class="loader text-center">
+            <div class="loader-outter"></div>
+            <div class="loader-inner"></div>
+
+            <div class="indicator">
+                <svg width="16px" height="12px">
+                    <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                </svg>
+            </div>
+            <div class="logo_preload"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mainModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white" id="modalHeader">
+                    <h5 id="modalTitle"></h5>
+                </div>
+                <div class="modal-body" id="modalBody"></div>
+            </div>
+        </div>
+    </div>
+
+    {{{ body }}}
+
+    <script src="/js/pwa.js"></script>
+    <script src="/js/status.js"></script>
+</body>
+
+</html>

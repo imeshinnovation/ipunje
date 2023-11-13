@@ -1,0 +1,31 @@
+
+<div class="card">
+    <div class="card-header">Editar Grupo Familiar</div>
+    <input type="hidden" id="id" value="{{famil._id}}">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="name_family" id="name_family" class="form-control" placeholder="Nombre del Grupo Familiar" autocomplete="off" value="{{famil.name_family}}">
+                    <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Nombre del Grupo Familiar</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                <select name="congregation" id="congregation" class="form-select">
+                    <option value="">Selecciona una Opción</option>
+                    {{#each sucursales}}
+                        <option value="{{ nombre_sucursal }}" {{#if (eq ../famil.congregation nombre_sucursal)}}selected{{/if}}>{{ nombre_sucursal }}</option>
+                    {{/each}}
+                </select>
+                <label for="grant"><i class="fas fa-place-of-worship fa-fw me-2"></i>Sucursal</label>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="updGF();"><i class="fas fa-save me-2"></i>Actualizar Registro</button>
+    </div>
+</div>
+
+{{>end}}

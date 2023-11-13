@@ -1,0 +1,58 @@
+{{>tables}}
+
+<div id="tbar">
+    <button class="btn btn-secondary shadow-sm" onclick="loadContent('mainproductos','/financiero/addproducto');"><i
+            class="fas fa-plus fa-fw me-2"></i>Agregar Productos</button>
+</div>
+
+<table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true" data-search="true"
+    data-show-jump-to="true" data-page-size='10' data-show-export="true" data-export-types="['csv','']"
+    data-mobile-responsive="true" data-check-on-init="true" data-click-to-select="true" data-toolbar="#toolbar"
+    class="table table-striped table-bordered table-sm" data-page-list="[50, 100, 200, All]" width="100%" id="dtable"
+    class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th data-field="sucursal" data-sortable="true">Sucursal</th>
+            <th data-field="codigo" data-sortable="true">Código</th>
+            <th data-field="producto" data-sortable="true">Producto</th>
+            <th data-field="cuenta_contable" data-sortable="true">Cuenta Contable</th>
+            <th data-field="estado" data-sortable="true">Estado</th>
+            <th data-field="inventario" data-sortable="true">Inventario</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each cuentas}}
+        <tr>
+            <td>{{sucursal}}</td>
+            <td>{{codigo}}</td>
+            <td>{{nombre_producto}}</td>
+            <td>{{nombre_cuenta}}</td>
+            <td>{{estado}}</td>
+            <td>{{inventario}}</td>
+            <td>
+                <div class="btn-group btn-secondary shadow-sm w-100">
+                    <button class="btn btn-sm btn-light"
+                        onclick="loadContent('mainproductos','/financiero/viewcuenta/{{_id}}')" title="Ver Cuenta"><i
+                            class="fas fa-eye fa-fw"></i></button>
+                    <button class="btn btn-sm btn-light"
+                        onclick="loadContent('mainproductos','/financiero/editcuenta/{{_id}}');"
+                        title="Editar Cuenta"><i class="fas fa-edit fa-fw"></i></button>
+                    <button class="btn btn-sm btn-light"
+                        onclick="delDialog('{{_id}}', '{{name}} {{cuenta}}', 'remUser', 'Eliminar Producto')"
+                        title="Eliminar Producto"><i class="fas fa-trash fa-fw"></i></button>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{>end}}
+
+<!--
+Andres Rincon Gerente Proyectos COLSOF
+Johana Diaz y Wilson (Comunicaciones) son de TI Banco
+
+Pondremos un Canal
+-->

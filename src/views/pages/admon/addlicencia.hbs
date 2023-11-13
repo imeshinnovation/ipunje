@@ -1,0 +1,25 @@
+
+<div class="card">
+    <div class="card-header">Agregar Nueva Licencia</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="licencia" id="licencia" class="form-control" placeholder="Nombre de la Licencia" autocomplete="off">
+                    <label for="licencia"><i class="fas fa-signature fa-fw me-2"></i>Nombre de la Licencia</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="description" id="description" class="form-control" placeholder="Descripción del Roll" autocomplete="off">
+                    <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Descripción de la Licencia</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="addLicen();"><i class="fas fa-save me-2"></i>Guardar Cambios</button>
+    </div>
+</div>
+
+{{>end}}

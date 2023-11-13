@@ -1,0 +1,258 @@
+<div class="card">
+    <div class="card-header">Editar Miembro</div>
+    <input type="hidden" id="id" value="{{famil._id}}">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-sign fa-fw me-2"></i>Nombres</div>
+                    <input type="text" name="names" id="names" class="form-control" value="{{adder.names}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-sign fa-fw me-2"></i>Apellidos
+                    </div>
+                    <input type="text" name="lastnames" id="lastnames" class="form-control" value="{{adder.lastnames}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-address-card fa-fw me-2"></i>Tipo
+                        Documento
+                    </div>
+                    <select name="typedoc" id="typedoc" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Pasaporte" {{#if (eq adder.typedoc 'Pasaporte')}}selected{{/if}}>Pasaporte</option>
+                        <option value="RUT" {{#if (eq adder.typedoc 'RUT')}}selected{{/if}}>RUT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Número
+                        Documento</div>
+                    <input type="text" name="numdoc" id="numdoc" class="form-control" value="{{adder.numdoc}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-font-awesome fa-fw me-2"></i>Nacionalidad</div>
+                    <select class="form-select" name="nationality" id="nationality">
+                        <option value="">Seleccione...</option>
+                        {{#each paises}}
+                        <option value="{{nombre}}" {{#if (eq ../adder.nationality nombre)}}selected{{/if}}>{{nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-tree-city fa-fw me-2"></i>Ciudad de
+                        Nacimiento</div>
+                    <input type="text" name="placeofbirth" id="placeofbirth" class="form-control" value="{{adder.placeofbirth}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Fecha de
+                        Nacimiento</div>
+                    <input type="date" name="dateofbirth" id="dateofbirth" class="form-control" value="{{adder.dateofbirth}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-venus-mars fa-fw me-2"></i>Genero
+                    </div>
+                    <select name="gender" id="gender" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Hombre" {{#if (eq adder.gender 'Hombre')}}selected{{/if}}>Hombre</option>
+                        <option value="Mujer" {{#if (eq adder.gender 'Mujer')}}selected{{/if}}>Mujer</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-location fa-fw me-2"></i>Dirección
+                    </div>
+                    <input type="text" name="address" id="address" class="form-control" value="{{adder.address}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</div>
+                    <input type="number" name="phonenumber" id="phonenumber" class="form-control" value="{{adder.phonenumber}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-envelope fa-fw me-2"></i>Email</div>
+                    <input type="email" name="email" id="email" class="form-control" value="{{adder.email}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-ring fa-fw me-2"></i>Estado
+                        Civil
+                    </div>
+                    <select name="civilstatus" id="civilstatus" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Soltero(a)" {{#if (eq adder.civilstatus 'Soltero(a)')}}selected{{/if}}>Soltero(a)</option>
+                        <option value="Casado(a)" {{#if (eq adder.civilstatus 'Casado(a)')}}selected{{/if}}>Casado(a)</option>
+                        <option value="Viudo(a)" {{#if (eq adder.civilstatus 'Viudo(a)')}}selected{{/if}}>Viudo(a)</option>
+                        <option value="Divorciado(a)" {{#if (eq adder.civilstatus 'Divorciado(a)')}}selected{{/if}}>Divorciado(a)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-people-roof fa-fw me-2"></i>Grupo
+                        Familiar
+                    </div>
+                    <select name="id_family" id="id_family" class="form-select">
+                        <option value="">Seleccione...</option>
+                        {{#each family_all}}
+                        <option value="{{_id}}" {{#if (eq ../adder.id_family _id)}}selected{{/if}}>{{name_family}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-people-group fa-fw me-2"></i>Lugar en
+                        la Familia
+                    </div>
+                    <select name="placefamily" id="placefamily" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Padre" {{#if (eq adder.placefamily 'Padre')}}selected{{/if}}>Padre</option>
+                        <option value="Madre" {{#if (eq adder.placefamily 'Madre')}}selected{{/if}}>Madre</option>
+                        <option value="Hijo(a)" {{#if (eq adder.placefamily 'Hijo(a)')}}selected{{/if}}>Hijo(a)</option>
+                        <option value="Sobrino(a)" {{#if (eq adder.placefamily 'Sobrino(a)')}}selected{{/if}}>Sobrino(a)</option>
+                        <option value="Primoo(a)" {{#if (eq adder.placefamily 'Primo(a)')}}selected{{/if}}>Primo(a)</option>
+                        <option value="Hermano(a)" {{#if (eq adder.placefamily 'Hermano(a)')}}selected{{/if}}>Hermano(a)</option>
+                        <option value="Abuelo(a)" {{#if (eq adder.placefamily 'Abuelo(a)')}}selected{{/if}}>Abuelo(a)</option>
+                        <option value="Otro" {{#if (eq adder.placefamily 'Otro')}}selected{{/if}}>Otro</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-graduation-cap fa-fw me-2"></i>Nivel
+                        Educación
+                    </div>
+                    <select name="scholarship" id="scholarship" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Pre-Escolar" {{#if (eq adder.scholarship 'Pre-Escolar')}}selected{{/if}}>Pre-Escolar</option>
+                        <option value="Enseñanza Básica" {{#if (eq adder.scholarship 'Enseñanza Básica')}}selected{{/if}}>Enseñanza Básica</option>
+                        <option value="Enseñanza Media" {{#if (eq adder.scholarship 'Enseñanza Media')}}selected{{/if}}>Enseñanza Media</option>
+                        <option value="Educación Superior" {{#if (eq adder.scholarship 'Educación Superior')}}selected{{/if}}>Educación Superior</option>
+                        <option value="Post-Titulos" {{#if (eq adder.scholarship 'Post-Titulos')}}selected{{/if}}>Post-Titulos</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-person-digging fa-fw me-2"></i>Ocupación</div>
+                    <select name="occupation" id="occupation" class="form-select">
+                        <option value="">Seleccione...</option>
+                        <option value="Empleado" {{#if (eq adder.occupation 'Empleado')}}selected{{/if}}>Empleado</option>
+                        <option value="Independiente" {{#if (eq adder.occupation 'Independiente')}}selected{{/if}}>Independiente</option>
+                        <option value="Hogar" {{#if (eq adder.occupation 'Hogar')}}selected{{/if}}>Hogar</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-calendar-days fa-fw me-2"></i>Fecha Bautismo
+                    </div>
+                    <input type="date" name="datewaterbaptism" id="datewaterbaptism" class="form-control" value="{{adder.datewaterbaptism}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-building-circle-check fa-fw me-2"></i>Ciudad Bautismo
+                    </div>
+                    <input type="text" name="citybaptism" id="citybaptism" class="form-control" value="{{adder.citybaptism}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-person-praying fa-fw me-2"></i>Pastor del
+                        Bautismo</div>
+                    <input type="text" name="sheperdbaptism" id="sheperdbaptism" class="form-control" value="{{adder.shepherdbaptism}}">
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-fire fa-fw me-2"></i>Recepción
+                        Espíritu Santo</div>
+                    <input type="date" name="holyspirit" id="holyspirit" class="form-control" value="{{adder.holyspirit}}">
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-building fa-fw me-2"></i>
+                        Congregación Actual</div>
+                    <select name="congregation" id="congregation" class="form-select">
+                        <option value="">Seleccione...</option>
+                        {{#each sucursales}}
+                        <option value="{{nombre_sucursal}}" {{#if (eq ../adder.congregation nombre_sucursal)}}selected{{/if}}>{{nombre_sucursal}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Cargos Desempeñados</div>
+                    <div class="card-body p-0">
+                        <textarea class="form-control" name="positionsheld" id="positionheld" rows="4">{{adder.positionsheld}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Como Conoció al Señor</div>
+                    <div class="card-body p-0">
+                        <textarea class="form-control" name="howmeetlord" id="howmeetlord" rows="4">{{adder.howmeetlord}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="card">
+                    <div class="card-header"><i class="fas fa-list fa-fw me-2"></i>Notas Eventuales</div>
+                    <div class="card-body p-0">
+                        <textarea class="form-control" name="addnote" id="addnote" rows="4">{{adder.addnote}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-2">
+                <div class="card mb-2">
+                    <div class="card-header d-flex">
+                        <div class="me-4">
+                            <h3>Registro Fotográfico</h3>
+                        </div>
+                        <div class="btn-group d-flex justify-content-end">
+                            <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                    class="fas fa-camera fa-fw"></i></button>
+                            <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                    class="fas fa-trash fa-fw"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0 m-0 text-center">
+                        <input class="d-none" type="file" id="formFile" onchange="preview()">
+                        <img id="frame" src="{{adder.photo}}" class="img-fluid" />
+                        <input type="hidden" name="image64" id="image64" value="{{adder.photo}}">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-success" onclick="updGF();"><i class="fas fa-save me-2"></i>Actualizar Registro</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{>end}}

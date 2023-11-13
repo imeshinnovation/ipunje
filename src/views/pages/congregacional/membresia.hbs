@@ -1,0 +1,32 @@
+{{>navbar}}
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Membresia</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow mt-4 mb-4 rounded">
+        <div class="card-header">Membresia</div>
+        <div class="card-body bg-white">
+            <div class="row">
+                <div class="col-md-3">{{>memenu}}</div>
+                <div class="col-md-9 table-responsive" id="memr">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        loadContent('memr', '/congregacional/grupof');
+    });
+</script>

@@ -1,0 +1,53 @@
+{{>tables}}
+
+<div class="card border-0 mb-4">
+    <div class="card-body">
+        <div id="tbar">
+            <button class="btn btn-secondary shadow-sm mb-3"
+                onclick="loadContent('memr','/congregacional/addgroupf');"><i class="fas fa-plus fa-fw me-2"></i>Agregar
+                Grupo Familiar</button>
+        </div>
+        <table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true"
+            data-search="true" data-show-jump-to="true" data-page-size='10' data-show-export="true" data-export-types="['csv','']" data-mobile-responsive="true" data-check-on-init="true"
+            data-click-to-select="true" data-toolbar="#toolbar" class="table table-striped table-bordered table-sm"
+            data-page-list="[50, 100, 200, All]" width="100%" id="dtable"
+            class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th data-field="familia" data-sortable="true">Familia</th>
+                    <th data-field="integrantes" data-sortable="true">Integrantes</th>
+                    <th data-field="congregacion" data-sortable="true">Sucursal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each familiy_all}}
+                <tr>
+                    <td>{{name_family}}</td>
+                    <td>
+                        <div id="count_{{_id}}"></div>
+                        <script>
+                            countFamily("{{_id}}");
+                        </script>
+                    </td>
+                    <td>{{congregation}}</td>
+                    <td>
+                        <div class="btn-group btn-secondary shadow-sm w-100">
+                            <button class="btn btn-sm btn-light" title="Ver"
+                                onclick="loadContent('memr', '/congregacional/viewgroupf/{{_id}}')"><i
+                                    class="fas fa-eye fa-fw"></i></button>
+                            <button class="btn btn-sm btn-light" title="Editar"
+                                onclick="loadContent('memr','/congregacional/editgroupf/{{_id}}')"><i
+                                    class="fas fa-pen fa-fw"></i></button>
+                            <button class="btn btn-sm btn-light" title="Eliminar" onclick="delDialog('{{_id}}','{{name_family}}','remGroupF','Eliminar Grupo Familiar');"><i
+                                    class="fas fa-trash fa-fw"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{>end}}

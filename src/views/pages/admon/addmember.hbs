@@ -1,0 +1,158 @@
+Agregar Usuario
+<hr>
+<form action="/admon/addmember" method="post" autocomplete="off" id="formulario"
+    onsubmit="return validaForm(event);">
+    <div class="row">
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="text" name="names" id="names" class="form-control" placeholder="Nombres"
+                    autocomplete="off">
+                <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Nombres</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="text" name="lastnames" id="lastnames" class="form-control" placeholder="Apellidos"
+                    autocomplete="off">
+                <label for="lastnames"><i class="fas fa-signature fa-fw me-2"></i>Apellidos</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="text" name="rut" id="rut" class="form-control" placeholder="Rut" autocomplete="off">
+                <label for="rut"><i class="fas fa-address-card fa-fw me-2"></i>Rut</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="text" name="phonenumber" id="phonenumber" class="form-control" placeholder="Teléfono"
+                    autocomplete="off">
+                <label for="phonenumber"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="email" name="email" id="email" class="form-control" placeholder="Email" autocomplete="off">
+                <label for="email"><i class="fas fa-envelope fa-fw me-2"></i>Email</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <select name="licencia" id="licencia" class="form-select">
+                    <option value="">Selecciona una Opción</option>
+                    {{#each licen}}
+                        <option value="{{licencia}}">{{licencia}}</option>
+                    {{/each}}
+                </select>
+                <label for="licencia"><i class="fas fa-graduation-cap fa-fw me-2"></i>Licencia</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="form-floating">
+                <select name="roll" id="roll" class="form-select">
+                    <option value="">Selecciona una Opción</option>
+                    {{#each rolex}}
+                        <option value="{{grant}}">{{roll}}</option>
+                    {{/each}}
+                </select>
+                <label for="licencia"><i class="fas fa-shield fa-fw me-2"></i>Privilegios</label>
+            </div>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="password" name="new_password" id="new_password" class="form-control"
+                    placeholder="Contraseña" minlength="8" autocomplete="off">
+                <label for="new_password"><i class="fas fa-lock fa-fw me-2"></i>Contraseña</label>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="form-floating">
+                <input type="password" name="re-password" id="re-password" class="form-control" placeholder="Confirmar"
+                    minlength="8" autocomplete="off">
+                <label for="re-password"><i class="fas fa-key fa-fw me-2"></i>Confirmar</label>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <div class="card mb-2">
+                <div class="card-header d-flex">
+                    <div class="me-4">
+                        <h3>Foto de Perfíl</h3>
+                    </div>
+                    <div class="btn-group d-flex justify-content-end">
+                        <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                class="fas fa-image fa-fw"></i></button>
+                        <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                class="fas fa-trash fa-fw"></i></button>
+                    </div>
+                </div>
+                <div class="card-body p-0 m-0">
+                    <input class="d-none" type="file" id="formFile" onchange="preview()">
+                    <img id="frame" src="" class="img-fluid" />
+                    <input type="hidden" name="image64" id="image64">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save fa-fw me-2"></i>Guardar Usuario</button>
+        </div>
+    </div>
+</form>
+
+<script>
+    function validaForm(evento) {
+        var msg = "";
+        if ($("#names").val() == "") {
+            msg = "Debes Ingresar los Nombres";
+            $("#names").focus();
+            sendAlert(msg, evento);
+        } else if ($("#lastnames").val() == "") {
+            msg = "Debes Ingresar los Apellidos";
+            $("#lastnames").focus();
+            sendAlert(msg, evento);
+        } else if ($("#rut").val() == "") {
+            msg = "Debes Ingresar el RUT";
+            $("#rut").focus();
+            sendAlert(msg, evento);
+        } else if ($("#phonenumber").val() == "") {
+            msg = "Debes Ingresar el Número de Teléfono";
+            $("#phonenumber").focus();
+            sendAlert(msg, evento);
+        } else if ($("#email").val() == "") {
+            msg = "Debes Ingresar el Correo Electrónico";
+            $("#email").focus();
+            sendAlert(msg, evento);
+        } else if ($("#licencia").val() == "") {
+            msg = "Debes Seleccionar la Licencia";
+            $("#licencia").focus();
+            sendAlert(msg, evento);
+        } else if ($("#new_password").val() == "") {
+            msg = "Debes Ingresar la Contraseña";
+            $("#new_password").focus();
+            sendAlert(msg, evento);
+        } else if ($("#re-password").val() == "") {
+            msg = "Debes Confirmar la Contraseña";
+            $("#re-password").focus();
+            sendAlert(msg, evento);
+        } else if ($("#new_password").val() != $("#re-password").val()) {
+            msg = "La Contraseña y la Confirmación son Diferentes";
+            sendAlert(msg, evento);
+            $("#new_password").val("");
+            $("#re-password").val("");
+            $("#new_password").focus();
+
+        } else if ($("#formFile").val() == "") {
+            msg = "Debes Carga la Fotografía de Perfíl";
+            $("#formFile").focus();
+            sendAlert(msg, evento);
+        } else {
+            return true;
+        }
+
+    }
+    
+    document.getElementById("formFile").addEventListener("change", (e) => {
+        uploadImage(e);
+    })
+
+</script>

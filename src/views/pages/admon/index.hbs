@@ -1,0 +1,61 @@
+{{>navbar}}
+
+<div class="container">
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Administración</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow mb-3">
+        <div class="card-header">Administración</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body">
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainadmon','/admon/members');"><i
+                                    class="fas fa-users fa-fw me-2"></i>Usuarios</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainadmon','/admon/roles');"><i
+                                    class="fas fa-dice-d6 fa-fw me-2"></i>Roles</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainadmon','/admon/licencias');"><i
+                                    class="fas fa-user-graduate fa-fw me-2"></i>Licencias</button>
+                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
+                                onclick="loadContent('mainadmon','/admon/oficiales');"><i
+                                    class="fas fa-user-secret fa-fw me-2"></i>Cargos Oficiales</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 mb-2">
+                    <div class="card border-0 w-100 mb-3">
+                        <div class="card-body p-1" id="mainadmon"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#mainadmon").load('/admon/members').fadeIn('500');
+    });
+
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+    function butDispose() {
+        $('[data-toggle="tooltip"]').tooltip('hide')
+    }
+
+</script>

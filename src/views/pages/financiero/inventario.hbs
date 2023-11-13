@@ -1,0 +1,35 @@
+{{>tables}}
+
+<div class="card">
+    <div class="card-header">
+        <h5>Vista de Inventario</h5>
+        <div class="row">
+            <div class="col-md-12">
+                <hr>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option>Seleccione una Sucursal</option>
+                    <option value="all">Todas las Sucursales</option>
+                    {{#each sucursales}}
+                    <option value="{{_id}}">{{nombre_sucursal}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option>Seleccione un Estado</option>
+                    <option value="all">Todos</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Baja">De Baja</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-info w-100"><i
+                        class="fas fa-filter fa-fw me-2"></i>Consultar</button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body"></div>
+    <div class="card-footer"></div>
+</div>

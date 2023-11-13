@@ -1,0 +1,110 @@
+{{>navbar}}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="/congregacional/sucursales">Sucursales</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ver Datos Sucursal</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow bg-white mt-4">
+        <div class="card-body p-0">
+            <div class="card border-0 mt-2">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-place-of-worship fa-fw me-2"></i>Nombre
+                                    Sucursal</div>
+                                <input type="text" name="nombre_sucursal" class="form-control"
+                                    value="{{nsuc.nombre_sucursal}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-person-praying fa-fw me-2"></i>Pastor
+                                </div>
+                                <input type="text" class="form-control" value="{{nsuc.pastor}}" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-map-pin fa-fw me-2"></i>Dirección
+                                </div>
+                                <input type="text" name="direccion" class="form-control" value="{{nsuc.direccion}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</div>
+                                <input type="text" name="telefono" class="form-control" value="{{nsuc.telefono}}"
+                                    readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-font-awesome fa-fw me-2"></i>Tipo
+                                    Sucursal</div>
+                                <input type="text" class="form-control" value="{{nsuc.tipo_sucursal}}" readonly></input>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <div class="card shadow mb-2">
+                                <div class="card-header"><i class="fas fa-map fa-fw me-2"></i>Geo Referenciación
+                                </div>
+                                <div class="card-body p-0">
+                                    <div class="map">
+                                        <div id="map"></div>
+                                    </div>
+                                    <div class="input-group">
+                                        <div class="input-group-text"><small>Compartir Dirección</small></div>
+                                        <input type="text" id="numphone" class="form-control small"
+                                            placeholder="Número Celular" />
+                                        <button class="btn btn-info"
+                                            onclick="sendAddress(`{{nsuc.nombre_sucursal}}`, `{{nsuc.direccion}}`);"><i
+                                                class="fas fa-paper-plane fa-fw"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function sendAddress(namesuc, address) {
+        const numtel = $("#numphone").val();
+        address = address.replace('#', '');
+        if (numtel) {
+            var sucu = `IPUNSOFT: [Sucursal ${namesuc}] = `;
+            var encotext = encodeURI(sucu + address);
+            window.open(`https://api.whatsapp.com/send?phone=${numtel}&text=${encotext}`, '_blank');
+        } else {
+            alert("Debes Ingresar un Número de Teléfono");
+        }
+    }
+
+    const map = L.map('map', { attributionControl: false, zoomControl: false }).setView([{{ nsuc.latitud }}, {{ nsuc.longitud }}], 16);
+
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="https://www.imesh.app" target="_new">iMesh</a>'
+    }).addTo(map);
+
+    L.control.zoom({
+        position: 'bottomleft'
+    }).addTo(map);
+
+    const sucursal = L.marker([{{ nsuc.latitud }}, {{ nsuc.longitud }}]).addTo(map).bindPopup('<b class="text-uppercase">Sucursal {{nsuc.nombre_sucursal}}</b>').openPopup();
+
+
+</script>

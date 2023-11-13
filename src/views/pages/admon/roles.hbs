@@ -1,0 +1,44 @@
+{{>tables}}
+
+<div id="tbar">
+    <button class="btn btn-secondary shadow-sm" onclick="$('#mainadmon').load('/admon/addroll').fadeIn('500');"><i
+            class="fas fa-plus fa-fw me-2"></i>Agregar Roll</button>
+</div>
+
+<table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true" data-side-pagination="server"
+            data-search="true" data-show-jump-to="true" data-page-size='10' data-show-export="true" data-export-types="['csv','']" data-mobile-responsive="true" data-check-on-init="true"
+            data-click-to-select="true" data-toolbar="#toolbar" class="table table-striped table-bordered table-sm"
+            data-page-list="[50, 100, 200, All]" width="100%" id="dtable" data-export-options-exportTypes="['csv']"
+            class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th data-field="roll" data-sortable="true">Roll</th>
+            <th data-field="description" data-sortable="true">Descripción</th>
+            <th data-field="grant" data-sortable="true">Permisos</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each rolex}}
+        <tr>
+            <td>{{roll}}</td>
+            <td>{{description}}</td>
+            <td>
+                {{#if (eq grant 1)}}Todos{{/if}}
+                {{#if (eq grant 2)}}Editar{{/if}}
+                {{#if (eq grant 3)}}Visualizar{{/if}}
+                {{#if (eq grant 4)}}Auditar{{/if}}
+            </td>
+            <td>
+                <div class="btn-group btn-secondary shadow-sm w-100">
+                    <button class="btn btn-sm btn-light" onclick="delDialog('{{_id}}', '{{roll}}', 'remRoll', 'Elimina Roll');" title="Eliminar Roll"><i class="fas fa-trash fa-fw"></i></button>
+                </div>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{>end}}
+
+

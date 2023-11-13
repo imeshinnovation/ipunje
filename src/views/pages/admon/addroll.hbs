@@ -1,0 +1,37 @@
+
+<div class="card">
+    <div class="card-header">Agregar Nuevo Roll</div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="roll" id="roll" class="form-control" placeholder="Nombre del Roll" autocomplete="off">
+                    <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Nombre del Roll</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="description" id="description" class="form-control" placeholder="Descripción del Roll" autocomplete="off">
+                    <label for="Nombres"><i class="fas fa-signature fa-fw me-2"></i>Descripción del Roll</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-2">
+                <div class="form-floating">
+                <select name="grant" id="grant" class="form-select">
+                    <option value="">Selecciona una Opción</option>
+                    <option value="1">Todos</option>
+                    <option value="2">Editar</option>
+                    <option value="3">Visualizar</option>
+                    <option value="4">Auditar</option>
+                </select>
+                <label for="grant"><i class="fas fa-shield fa-fw me-2"></i>Permisos</label>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="addData();"><i class="fas fa-save me-2"></i>Guardar Cambios</button>
+    </div>
+</div>
+
+{{>end}}

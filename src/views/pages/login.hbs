@@ -1,0 +1,32 @@
+<video autoplay muted loop id="background" src="/assets/background_1.mp4" poster="/assets/background_1.mp4">
+</video>
+
+<div class="content">
+  <div class="card shadow p-0 m-0 border-0 w-100">
+    <div class="card-header border-0">
+      <img src="/assets/Ipunsoft.png" width="90%">
+    </div>
+    <div class="card-body text-center fw-bold">
+      <p>Acceso al Sistema</p>
+      <div class="input-group mb-3">
+        <div class="input-group-text"><i class="fas fa-envelope fa-fw" id="icon"></i></div>
+        <input type="email" id="email" class="form-control" placeholder="Correo Electrónico">
+        <input type="password" id="passwd" class="form-control d-none" placeholder="Contraseña">
+        <input type="text" id="a2f" class="form-control d-none" placeholder="Ingrese Código">
+        <p id="more"></p>
+      </div>
+      <button class="btn btn-info w-100" id="steper"><i class="fas fa-arrow-right fa-fw me-2"></i>Siguiente</button>
+      <br><br>
+      <a href="" class="d-none" id="mkac"></a>
+    </div>
+    <div class="card-footer text-center border-0">
+      <div style="font-size:11px;">Iglesia Pentecostal Unida del Nombre de Jesús<br>Santiago de Chile</div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+
+  $("#steper").click(loginstep)
+
+</script>
