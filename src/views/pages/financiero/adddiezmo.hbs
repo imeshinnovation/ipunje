@@ -1,16 +1,72 @@
 {{>tables}}
 
 <div class="card">
-    <div class="card-header">Nuevo Documento de Diezmos</div>
+    <div class="card-header">Nuevo Registro de Diezmos</div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="form-floating">
-                    <input type="date" name="fecha" id="fecha" class="form-control" autocomplete="off">
-                    <label for="fecha"><i class="fas fa-signature fa-fw me-2"></i>Fecha Registro</label>
+        <form method="post" action="/financiero/adddiezmo" autocomplete="off" id="formulario"
+            onsubmit="return validaForm(event);">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="date" name="fecha" id="fecha" class="form-control" autocomplete="off">
+                        <label for="fecha"><i class="fas fa-signature fa-fw me-2"></i>Fecha Registro</label>
+                    </div>
+                </div>
+                <div class="col-md-8 mb-4">
+                    <div class="form-floating">
+                        <select class="form-select" name="selprod" id="selprod">
+                            <option value="">Selecciona Producto</option>
+                            {{#each cactivos}}
+                            <option value="{{cuenta_activo}}">{{code_name}}</option>
+                            {{/each}}
+                        </select>
+                        <label for="fecha"><i class="fas fa-signature fa-fw me-2"></i>Producto Financiero</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="ingreso" id="ingreso" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                        <label for="ingreso"><i class="fas fa-dollar fa-fw me-2"></i>Ingreso</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="aporte" id="aporte" class="form-control" readonly>
+                        <label for="aporte"><i class="fas fa-dollar fa-fw me-2"></i>Aporte (Diezmo + FOPS)</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="cuentac" id="cuentac" class="form-control" readonly>
+                        <label for="cuentac"><i class="fas fa-dollar fa-fw me-2"></i>Cuenta Contable</label>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="card mb-2">
+                        <div class="card-header d-flex">
+                            <div class="me-4">
+                                <h3>Registro Transacción Financiera</h3>
+                            </div>
+                            <div class="btn-group d-flex justify-content-end">
+                                <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                        class="fas fa-camera fa-fw"></i></button>
+                                <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                        class="fas fa-trash fa-fw"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 m-0 text-center">
+                            <input class="d-none" type="file" id="formFile" onchange="preview()">
+                            <img id="frame" src="" class="img-fluid" />
+                            <input type="hidden" name="image64" id="image64">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <button class="btn btn-success shadow-sm" type="submit"><i
+                            class="fas fa-save fa-fw me-2"></i>Guardar Registro</button>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -21,6 +77,48 @@
         var month = ("0" + (now.getMonth() + 1)).slice(-2);
         var today = now.getFullYear() + "-" + month + "-" + day;
         $('#fecha').val(today);
+    })
+
+    $("#ingreso").change(function () {
+        var ingreso = this.value;
+        var diezmo = ingreso * 10 / 100;
+        var postd = ingreso - diezmo;
+        var fops = postd * 7 / 100;
+        var aporte = new Intl.NumberFormat().format(parseInt(diezmo + fops));
+        $("#aporte").val(aporte);
+        this.value = new Intl.NumberFormat().format(this.value);
+    })
+
+    $("#selprod").change(function () {
+        $("#cuentac").val(this.value);
+    })
+
+    function validaForm(evento) {
+        var msg = "";
+        if ($("#fecha").val() == "") {
+            msg = "Debes Ingresar la Fecha para el Registro";
+            $("#fecha").focus();
+            sendAlert(msg, evento);
+        } else if ($("#selprod").val() == "") {
+            msg = "Debes Seleccionar el Producto Financiero";
+            $("#selprod").focus();
+            sendAlert(msg, evento);
+        } else if ($("#ingreso").val() == "") {
+            msg = "Debes Registrar el Ingreso";
+            $("#ingreso").focus();
+            sendAlert(msg, evento);
+        } else if ($("#formFile").val() == "") {
+            msg = "Debes Carga la Fotografía del Registro Financiero";
+            $("#formFile").focus();
+            sendAlert(msg, evento);
+        } else {
+            return true;
+        }
+
+    }
+
+    document.getElementById("formFile").addEventListener("change", (e) => {
+        uploadImage(e);
     })
 
 </script>

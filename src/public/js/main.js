@@ -559,7 +559,6 @@ function openFile() {
 }
 
 function sendAlert(msg, evento) {
-    console.log(typeof(evento));
     if(typeof(evento) !== "undefined"){
         evento.preventDefault();
     }

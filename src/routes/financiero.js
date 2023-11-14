@@ -169,7 +169,9 @@ Routes.get('/adddiezmo', async (req, res) => {
     if (req.session.user) {
         const user = await admins.all()
         const cuentas = await ccontables.all()
-        res.render('pages/financiero/adddiezmo', { layout: false, user, cuentas })
+        const cactivos = await pcontables.cactivos()
+        console.log(cactivos)
+        res.render('pages/financiero/adddiezmo', { layout: false, user, cuentas, cactivos })
     } else {
         res.redirect('/login')
     }

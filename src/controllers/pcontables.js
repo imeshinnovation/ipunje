@@ -34,5 +34,8 @@ module.exports = {
         const { id } = body
         const del = await pcontables.findByIdAndDelete({ _id: id })
         return { 'msg': 'OK' }
+    },
+    cactivos: async () => {
+        return await pcontables.find({ activo: 1 }).lean()
     }
 }
