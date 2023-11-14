@@ -11,4 +11,5 @@ const pcontablesSchema = new Schema({
     date_record: { type: String }
 })
 
+
 module.exports = mongoose.model("pcontables", pcontablesSchema, "pcontables")

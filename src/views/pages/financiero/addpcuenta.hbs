@@ -114,6 +114,7 @@
                 'cuenta_pasivo': $("#cuenta_pasivo option").filter(':selected').val(),
                 'date_record': (Dater.getDate() < 10 ? '0' + Dater.getDate() : Dater.getDate()) + '/' + ((Dater.getMonth() + 1) < 10 ? '0' + (Dater.getMonth() + 1) : (Dater.getMonth() + 1)) + '/' + Dater.getFullYear() + ' ' + (Dater.getHours() < 10 ? '0' + Dater.getHours() : Dater.getHours()) + ':' + (Dater.getMinutes() < 10 ? '0' + Dater.getMinutes() : Dater.getMinutes()) + ':' + (Dater.getSeconds() < 10 ? '0' + Dater.getSeconds() : Dater.getSeconds())
             }
+            
             await axios.post('/financiero/addpcuenta', datos).then((response) => {
                 loadContent('maincuentas', '/financiero/prodfin');
             }).catch((err) => {

@@ -22,7 +22,8 @@ Routes.get('/cdash', async (req, res) => {
         const user = await admins.all()
         const cactivos = await ccontables.cactivos()
         const cpasivos = await ccontables.cpasivos()
-        res.render('pages/financiero/cdash', { layout: false, user, cactivos, cpasivos })
+        const pcount = await pcontables.count()
+        res.render('pages/financiero/cdash', { layout: false, user, cactivos, cpasivos, pcount })
     } else {
         res.redirect('/login')
     }
@@ -42,7 +43,6 @@ Routes.get('/prodfin', async (req, res) => {
     if (req.session.user) {
         const user = await admins.all()
         const cuentas = await pcontables.all()
-        console.log(cuentas);
         res.render('pages/financiero/prodfin', { layout: false, user, cuentas })
     } else {
         res.redirect('/login')
