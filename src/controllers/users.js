@@ -18,16 +18,22 @@ module.exports = {
         return cfamily
     },
     oneuser: async (id) => {
-        const oneus = await users.findOne({_id: id})
+        const oneus = await users.findOne({ _id: id })
         return oneus
     },
     verifymail: async (mail) => {
-        const yer = await users.findOne({email: mail})
+        const yer = await users.findOne({ email: mail })
         return yer
     },
+    upd: async (body) => {
+        const updu = await users.updateOne({ _id: body.id }, body)
+        return updu        
+    },
     addmember: async (body) => {
-        const {names, lastnames, typedoc, numdoc, nationality, placeofbirth, dateofbirth, gender, address, phonenumber, email, civilstatus, id_family, placefamily, scholarship, congregation, occupation, datewaterbaptism, citybaptism, sheperdbaptism, holyspirit, positionsheld, howmeetlord, addnote, image64} = body
-        const adu = new users()
+        //const {names, lastnames, typedoc, numdoc, nationality, placeofbirth, dateofbirth, gender, address, phonenumber, email, civilstatus, id_family, placefamily, scholarship, congregation, occupation, datewaterbaptism, citybaptism, sheperdbaptism, holyspirit, positionsheld, howmeetlord, addnote, image64} = body
+        body.photo = body.image64
+        const adu = await users.create(body)
+        /*const adu = new users()
         adu.names = names
         adu.lastnames = lastnames
         adu.typedoc = typedoc
@@ -53,7 +59,7 @@ module.exports = {
         adu.howmeetlord = howmeetlord
         adu.addnote = addnote
         adu.photo = image64
-        adu.save()
+        adu.save()*/
         return adu
     },
     del: async (body) => {

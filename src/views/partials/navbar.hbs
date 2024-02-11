@@ -33,11 +33,12 @@
           <small class="small">
             <div class="bg-trans p-3 mt-3 mb-3 rounded shadow-sm">
               <i class="fas fa-user fa-fw me-2"></i>{{myuser.names}}<br>
-              <i class="fas fa-envelope fa-fw me-2"></i>{{myuser.email}}
+              <i class="fas fa-envelope fa-fw me-2"></i>{{myuser.email}}<br>
+              <i class="fas fa-lock fa-fw me-2"></i>{{#if (eq myuser.roll 1)}}Administrador{{else if (eq myuser.roll 2)}}Gestor de Contenidos{{else if (eq myuser.roll 3)}}Solo Lectura{{else}}Auditor{{/if}}
             </div>
             <button class="btn btn-warning shadow-sm float-end" data-bs-dismiss="offcanvas"><i
                 class="fas fa-times fa-fw"></i></button>
-            <button class="btn btn-light shadow-sm float-start" onclick="loadPage('/profile');"><i class="fas fa-cogs fa-fw me-2"></i>Mi Perfil</button>
+            <button class="btn btn-light shadow-sm float-start" onclick="loadPage('/admon/profile');"><i class="fas fa-cogs fa-fw me-2"></i>Mi Perfil</button>
 
           </small>
         </div>
@@ -65,8 +66,8 @@
               onclick="loadPage('/congregacional/membresia');">Membresía</button>
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
               onclick="loadPage('/congregacional/amigos');">Amigos / Visitas</button>
-            <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
-              onclick="loadPage('/congregacional/agenda');">Agenda</button>
+            <!--<button type="button" class="btn btn-light shadow-sm w-100 mb-1"
+              onclick="loadPage('/congregacional/agenda');">Agenda</button>-->
           </div>
         </div>
       </div>
@@ -83,7 +84,8 @@
           <div class="accordion-body p-0 pt-2">
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
               onclick="loadPage('/congregacional/inventario');">Activos</button>
-            <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Traspaso</button>
+              {{#if (eq myuser.roll 1)}}
+            <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Traspaso</button>{{/if}}
           </div>
         </div>
       </div>
@@ -98,12 +100,14 @@
         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
           data-bs-parent="#accordionFlushExample">
           <div class="accordion-body p-0 pt-2">
+            {{#if (eq myuser.roll 1)}}
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
-              onclick="loadPage('/financiero/ccontables');">Cuentas Contables</button>
+              onclick="loadPage('/financiero/ccontables');">Cuentas Contables</button>{{/if}}
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
               onclick="loadPage('/financiero/diezmos');">Diezmos y Ofrendas</button>
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Créditos</button>
-            <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Cierre y Apertura</button>
+            {{#if (eq myuser.roll 1)}}
+            <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Cierre y Apertura</button>{{/if}}
           </div>
         </div>
       </div>
@@ -124,8 +128,9 @@
       </div>
     </div>
     <div class="btn-group shadow-sm w-100 mb-2">
+      {{#if (eq myuser.roll 1)}}
       <button type="button" class="btn btn-light" onclick="location.href='/admon/';"><i
-          class="fas fa-cog fa-fw me-2"></i>Administración</button>
+          class="fas fa-cog fa-fw me-2"></i>Administración</button>{{/if}}
       <button class="btn btn-light" onclick="location.href='/login'"><i
           class="fas fa-right-from-bracket fa-fw me-2"></i>Salir</button>
     </div>

@@ -3,6 +3,8 @@ const users = require('../controllers/users')
 const admins = require('../controllers/admins')
 const path = require('path')
 const family = require('../controllers/family')
+const friends = require('../controllers/friends')
+const compromises = require('../controllers/compromises')
 const csv = require('csvtojson')
 const { EnviarCorreo } = require('../libs/helpers')
 
@@ -31,10 +33,54 @@ Routes.get('/addmember', async (req, res) => {
     }
 })
 
+Routes.get('/addcompromise', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const mysucursal = await sucursal.mysucursal(myuser.names + ' ' + myuser.lastnames)
+        const friend = await friends.all()
+        res.render('pages/congregacional/addcompromise', { layout: false, user, myuser, friend, mysucursal })
+    } else {
+        res.redirect('/login')
+    }
+})
+
 Routes.post('/addmembresia', async (req, res) => {
     if (req.session.user) {
         const adu = users.addmember(req.body)
         res.redirect("/congregacional/membresia")
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/updmember', async (req, res) => {
+    if (req.session.user) {
+        const adu = await users.upd(req.body)
+        res.json(adu)
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/addcompromise', async (req, res) => {
+    if (req.session.user) {
+        const adgc = await compromises.add(req.body)
+        res.json(adgc);
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/editcompromise/:id?', async (req, res) => {
+    const compromise = await compromises.one(req.params.id)
+    res.render('pages/congregacional/editcompromise', { layout: false, compromise })
+})
+
+Routes.post('/updcompromise', async (req, res) => {
+    if (req.session.user) {
+        const adgc = await compromises.upd(req.body)
+        res.json(adgc);
     } else {
         res.redirect('/login')
     }
@@ -108,16 +154,33 @@ Routes.get('/grupof', async (req, res) => {
     res.render('pages/congregacional/groupf', { layout: false, familiy_all })
 })
 
+Routes.get('/grupoa', async (req, res) => {
+    const friends_all = await friends.all()
+    res.render('pages/congregacional/groupa', { layout: false, friends_all })
+})
+
 Routes.get('/addgroupf', async (req, res) => {
     const familiy_all = await family.all()
     const sucursales = await sucursal.allsucursales()
     res.render('pages/congregacional/addgroupf', { layout: false, familiy_all, sucursales })
 })
 
+Routes.get('/addgroupa', async (req, res) => {
+    const friends_all = await friends.all()
+    const sucursales = await sucursal.allsucursales()
+    res.render('pages/congregacional/addgroupa', { layout: false, friends_all, sucursales })
+})
+
 Routes.get('/editgroupf/:id?', async (req, res) => {
     const famil = await family.one(req.params.id)
     const sucursales = await sucursal.allsucursales()
     res.render('pages/congregacional/editgroupf', { layout: false, famil, sucursales })
+})
+
+Routes.get('/editgroupa/:id?', async (req, res) => {
+    const friend = await friends.one(req.params.id)
+    const sucursales = await sucursal.allsucursales()
+    res.render('pages/congregacional/editgroupa', { layout: false, friend, sucursales })
 })
 
 Routes.post('/updgroupf', async (req, res) => {
@@ -130,10 +193,28 @@ Routes.post('/updgroupf', async (req, res) => {
 })
 
 
+Routes.post('/updgroupa', async (req, res) => {
+    if (req.session.user) {
+        const adga = await friends.upd(req.body)
+        res.json(adga);
+    } else {
+        res.redirect('/login')
+    }
+})
+
 Routes.post('/addgroupf', async (req, res) => {
     if (req.session.user) {
         const adgf = await family.add(req.body)
         res.json(adgf);
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/addgroupa', async (req, res) => {
+    if (req.session.user) {
+        const adga = await friends.add(req.body)
+        res.json(adga);
     } else {
         res.redirect('/login')
     }
@@ -160,9 +241,34 @@ Routes.post('/delgroupf', async (req, res) => {
     }
 })
 
+Routes.post('/delgroupa', async (req, res) => {
+    if (req.session.user) {
+        const delf = await friends.del(req.body)
+        res.json(delf)
+
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/delcompromise', async (req, res) => {
+    if (req.session.user) {
+        const delc = await compromises.del(req.body)
+        res.json(delc)
+
+    } else {
+        res.redirect('/login')
+    }
+})
+
 Routes.get('/members', async (req, res) => {
     const user = await users.allusers()
     res.render('pages/congregacional/members', { layout: false, user })
+})
+
+Routes.get('/compromises', async (req, res) => {
+    const compromise = await compromises.all()
+    res.render('pages/congregacional/compromises', { layout: false, compromise })
 })
 
 Routes.get('/sucursales', async (req, res) => {

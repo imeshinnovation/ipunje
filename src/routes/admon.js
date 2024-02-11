@@ -35,6 +35,16 @@ Routes.get('/addoficial', async (req, res) => {
     }
 })
 
+Routes.get('/profile', async (req, res) => {
+    if(req.session.user){
+        const user = await admins.one(req.session.user)
+        const myuser = user
+	    res.render('pages/admon/profile', { myuser, user })
+    } else {
+        res.redirect('/login')
+    }
+})
+
 Routes.post('/addoficial', async (req, res) => {
     if(req.session.user){
 	    const nofi = await oficial.add(req.body)
@@ -74,8 +84,12 @@ Routes.get('/roles', async (req, res) => {
 })
 
 Routes.get('/roll/:id?', async (req, res) => {
-    const rolex = await roles.one(req.params.id)
-	res.json({ 'roll': rolex.roll })
+    try {
+        const rolex = await roles.one(req.params.id)
+	    res.json({ 'roll': rolex.roll })
+    } catch {
+        res.json({})
+    }
 })
 
 Routes.get('/addroll', async (req, res) => {
@@ -199,6 +213,15 @@ Routes.post('/delmember', async (req, res) => {
     if(req.session.user){
         const dmem = await admins.del(req.body)
         res.json(dmem)
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/upd', async (req, res) => {
+    if(req.session.user){
+        const umem = await admins.update(req.body)
+        res.json(umem)
     } else {
         res.redirect('/login')
     }

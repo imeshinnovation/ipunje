@@ -23,6 +23,7 @@
     "bootstrap": "^5.2.3",
     "bootstrap-table": "^1.21.4",
     "bootstrap-toggle": "^2.2.2",
+    "chart.js": "^4.4.0",
     "connect-mongo": "^5.0.0",
     "cors": "^2.8.5",
     "csvtojson": "^2.0.10",

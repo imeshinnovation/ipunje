@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-header">Editar Compromiso</div>
+    <div class="card-body">
+        <div class="row">
+            <input type="hidden" name="id" id="id" value="{{compromise._id}}">
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <input type="text" name="friend_name" id="friend_name" class="form-control"
+                        placeholder="Nombres Completos" autocomplete="off" value="{{compromise.friend_name}}" readonly>
+                    <label for="names"><i class="fas fa-font fa-fw me-2"></i>Nombre Amigo - Visita</label>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-calendar fa-fw me-2"></i>Fecha
+                    </div>
+                    <input type="date" name="date_compromise" id="date_compromise" class="form-control" value="{{compromise.date_compromise}}">
+                </div>
+            </div>
+            <div class="col-md-12 mb-3">
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-receipt fa-fw me-2"></i>Compromiso</div>
+                    <textarea name="compromise" id="compromise" rows="10" class="form-control">{{compromise.compromise}}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-success" onclick="updComp();"><i class="fas fa-save me-2"></i>Actualizar Registro</button>
+    </div>
+</div>
+
+{{>end}}

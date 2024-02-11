@@ -9,6 +9,10 @@ module.exports = {
         const onesuc = await sucursal.findOne({_id: id})
         return JSON.parse(JSON.stringify(onesuc))
     },
+    mysucursal: async (pastor) => {
+        const onesuc = await sucursal.findOne({pastor})
+        return JSON.parse(JSON.stringify(onesuc))
+    },
     addsucursal: async (body) => {
         const { nombre_sucursal, pastor, direccion, telefono, tipo_sucursal, latitud, longitud } = body
         const nsuc = new sucursal()

@@ -1,0 +1,71 @@
+{{>tables}}
+<div class="p-0 m-0" id="viewdiezmo">
+    <div class="card">
+        <div class="card-header">Registro de Diezmos</div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="code" id="code" class="form-control" readonly
+                            value="{{alldata.0.code}}">
+                        <label for="code"><i class="fas fa-file fa-fw me-2"></i>Documento</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="date" name="fecha_registro" id="fecha_registro" class="form-control" readonly
+                            value="{{alldata.0.fecha_registro}}">
+                        <label for="fecha_registro"><i class="fas fa-calendar fa-fw me-2"></i>Fecha Registro</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="nombre_pastor" readonly
+                            value="{{alldata.0.nombre_pastor}}">
+                        <label for="nombre_pastor"><i class="fas fa-signature fa-fw me-2"></i>Nombre del Pastor</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="ingreso" id="ingreso" class="form-control" readonly
+                            value="{{alldata.0.ingreso}}">
+                        <label for="ingreso"><i class="fas fa-dollar fa-fw me-2"></i>Ingreso</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="aporte" id="aporte" class="form-control" readonly
+                            value="{{alldata.0.aporte}}">
+                        <label for="aporte"><i class="fas fa-dollar fa-fw me-2"></i>Aporte (Diezmo + FOPS)</label>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="form-floating">
+                        <input type="text" name="cuenta_contable" id="cuenta_contable" class="form-control" readonly
+                            value="{{alldata.0.cuenta_contable}}">
+                        <label for="cuenta_contable">Cuenta Contable</label>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="card mb-2">
+                        <div class="card-header d-flex">
+                            <div class="me-4">
+                                <h3>Registro Bancario</h3>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <img src="{{alldata.0.image64}}" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-4">
+    <button class="btn btn-success" onclick="printCard('viewdiezmo')">
+        <i class="fas fa-print fa-fw me-3"></i>Imprimir
+    </button>
+</div>
+</div>
+{{>end}}

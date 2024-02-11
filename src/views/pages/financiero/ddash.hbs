@@ -2,5 +2,200 @@
 
 <h1>DashBoard</h1>
 <hr>
-Diezmos y Ofrendas
+<div class="row">
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm">
+            <div class="card-header">Diezmos Año 2023</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="cardc bg-c-blue order-card mb-2">
+                            <div class="card-block">
+                                <h6 class="m-b-20 fw-bold">Ingresos</h6>
+                                <h3 class="text-right"><i class="fa fa-dollar me-1"></i><span>45.780.460</span></h3>
+                            </div>
+                        </div>
+                        <div class="cardc bg-c-pink order-card mb-2">
+                            <div class="card-block">
+                                <h6 class="m-b-20 fw-bold">Aportes</h6>
+                                <h3 class="text-right"><i class="fa fa-dollar me-1"></i><span>486</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="chart-container">
+                            <canvas id="chart" style="height: 270px; width: 100%;"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mb-3">
+        <div class="card shadow-sm">
+            <div class="card-header">Ofrendas Año 2023</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="chart-container">
+                            <canvas id="chart1" style="height: 270px; width: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="cardc bg-c-green order-card mb-2">
+                            <div class="card-block">
+                                <h6 class="m-b-20 fw-bold">Total Misiones</h6>
+                                <h3 class="text-right"><i class="fa fa-dollar me-1"></i><span>25.600.000</span></h3>
+                            </div>
+                        </div>
+                        <div class="cardc bg-c-yellow order-card mb-2">
+                            <div class="card-block">
+                                <h6 class="m-b-20 fw-bold">Total Obra Social</h6>
+                                <h3 class="text-right"><i class="fa fa-dollar me-1"></i><span>17.890.230</span></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {{>end}}
+
+<script>
+    var fechaX = new Date();
+
+    var chart = document.getElementById("chart").getContext("2d");
+    bgradient = chart.createLinearGradient(0, 0, 0, 450);
+    bgradient.addColorStop(0, 'rgba(15,117,235,0.5)');
+    bgradient.addColorStop(1, 'rgba(115,180,255,0.5)');
+    pgradient = chart.createLinearGradient(0, 0, 0, 450);
+    pgradient.addColorStop(0, 'rgba(240,48,80,0.5)');
+    pgradient.addColorStop(1, 'rgba(255,134,154,0.5)');
+
+    var chart1 = document.getElementById("chart1").getContext("2d");
+    vgradient = chart1.createLinearGradient(0, 0, 0, 450);
+    vgradient.addColorStop(0, 'rgba(46,216,182,0.5)');
+    vgradient.addColorStop(1, 'rgba(89,224,197,0.5)');
+    agradient = chart.createLinearGradient(0, 0, 0, 450);
+    agradient.addColorStop(0, 'rgba(255,182,77,0.5)');
+    agradient.addColorStop(1, 'rgba(255,203,128,0.5)');
+
+
+    var MONTHS = [
+        'Ene',
+        'Feb',
+        'Mar',
+        'Abr',
+        'May',
+        'Jun',
+        'Jul',
+        'Ago',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dic'
+    ];
+
+    var data = {
+        labels: MONTHS,
+        datasets: [{
+            label: 'Ingresos',
+            data: [10, 30, 45, 65, 59, 80, 81, 56, 55, 40, 0, 0],
+            fill: true,
+            borderRadius: 5,
+            borderWidth: 1,
+            backgroundColor: bgradient
+        },
+        {
+            label: 'Aportes',
+            data: [6, 12, 17, 23, 20, 32, 30, 19, 20, 8, 0, 0],
+            fill: true,
+            borderRadius: 5,
+            borderWidth: 1,
+            backgroundColor: pgradient
+        }
+        ]
+    };
+
+    var data1 = {
+        labels: MONTHS,
+        datasets: [{
+            label: 'Ingresos',
+            data: [10, 30, 4, 5, 59, 80, 81, 56, 55, 40, 0, 0],
+            fill: true,
+            borderRadius: 5,
+            borderWidth: 1,
+            backgroundColor: vgradient
+        },
+        {
+            label: 'Aportes',
+            data: [6, 12, 17, 23, 20, 32, 30, 19, 20, 8, 0, 0],
+            fill: true,
+            borderRadius: 5,
+            borderWidth: 1,
+            backgroundColor: agradient
+        }
+        ]
+    };
+
+    var options = {
+        animation: {
+            easing: 'easeInOutQuad',
+            duration: 520
+        },
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: true,
+                align: 'start',
+                textAlign: 'left',
+                labels: {
+                    boxWidth: 20,
+                    boxHeight: 20,
+                    useBorderRadius: true,
+                    borderRadius: 3
+                }
+            }
+        },
+        scales: {
+            y: {
+                stacked: false,
+                label: {
+                    display: false
+                },
+                grid: {
+                    display: true,
+                    label: false
+                },
+                ticks: {
+                    display: false
+                }
+            },
+            x: {
+                grid: {
+                    display: true,
+                    label: false
+                },
+                label: {
+                    display: false
+                }
+            }
+        }
+    };
+
+
+
+    new Chart(chart, {
+        type: 'bar',
+        options: options,
+        data: data
+    });
+
+    new Chart(chart1, {
+        type: 'line',
+        options: options,
+        data: data1
+    });
+
+</script>

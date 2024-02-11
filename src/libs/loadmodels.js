@@ -9,5 +9,23 @@ const family = require('../models/family');
 const oficial = require('../models/oficial');
 const ccontables = require('../models/ccontables');
 const pcontables = require('../models/pcontables');
+const diezmos = require('../models/diezmos');
+const friends = require('../models/friends');
+const compromises = require('../models/compromise');
 
-module.exports = { white, users, codes, sucursal, rolls, admins, licencias, family, oficial, ccontables, pcontables };
+module.exports = { 
+    white, 
+    users, 
+    codes, 
+    sucursal, 
+    rolls, 
+    admins, 
+    licencias, 
+    family, 
+    oficial, 
+    ccontables, 
+    pcontables, 
+    diezmos, 
+    friends, 
+    compromises
+};

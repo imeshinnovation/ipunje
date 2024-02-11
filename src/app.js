@@ -112,6 +112,7 @@ app1.use("/css", express.static(path.join(__dirname + "../../node_modules/bootst
 app1.use("/js", express.static(path.join(__dirname + "../../node_modules/axios/dist")));
 app1.use("/js", express.static(path.join(__dirname + "../../node_modules/apexcharts/dist")));
 app1.use("/js", express.static(path.join(__dirname + "../../node_modules/leaflet/dist")));
+app1.use("/js", express.static(path.join(__dirname + "../../node_modules/chart.js/dist")));
 app1.use(
   "/css",
   express.static(path.join(__dirname + "../../node_modules/@fortawesome/fontawesome-free/css")

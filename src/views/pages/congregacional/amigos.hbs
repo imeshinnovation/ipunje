@@ -2,6 +2,31 @@
 
 <div class="container">
 
-<h1>Amigos</h1>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Amigos - Visitas</li>
+        </ol>
+    </nav>
 
+    <div class="card shadow mt-4 mb-4 rounded">
+        <div class="card-header">Amigos - Visitas</div>
+        <div class="card-body bg-white">
+            <div class="row">
+                <div class="col-md-3">{{>amimenu}}</div>
+                <div class="col-md-9 table-responsive" id="amir">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer"></div>
+    </div>
 </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        loadContent('amir', '/congregacional/grupoa');
+    });
+</script>

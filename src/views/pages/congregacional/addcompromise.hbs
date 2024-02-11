@@ -1,0 +1,70 @@
+<div class="card mb-4">
+    <div class="card-header">Registro de Compromisos</div>
+    <div class="card-body bg-white">
+        <div class="card mt-2 border-0">
+            <div class="card-body p-0">
+                    <div class="row">
+                        <input type="hidden" name="sucursal" id="sucursal" value="{{mysucursal.nombre_sucursal}}">
+                        <input type="hidden" name="my_email" id="my_email" value="{{myuser.email}}">
+                        <input type="hidden" name="my_name" id="my_name" value="{{myuser.names}} {{myuser.lastnames}}">
+                        <div class="col-md-6 mb-3">
+                            <div class="input-group shadow-sm">
+                                <div class="input-group-text"><i class="fas fa-user fa-fw me-2"></i>Amigo -
+                                    Visita
+                                </div>
+                                <select name="friend_name" id="friend_name" class="form-select">
+                                    <option value="">Seleccione...</option>
+                                    {{#each friend}}
+                                    <option value="{{names}}">{{names}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="input-group shadow-sm">
+                                <div class="input-group-text"><i class="fas fa-calendar fa-fw me-2"></i>Fecha
+                                </div>
+                                <input type="date" name="date_compromise" id="date_compromise" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="input-group shadow-sm">
+                                <div class="input-group-text"><i class="fas fa-receipt fa-fw me-2"></i>Compromiso</div>
+                                <textarea name="compromise" id="compromise" rows="10" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                                <button class="btn btn-success shadow-sm" type="submit" onclick="validar()"><i
+                                        class="fas fa-save fa-fw me-2"></i>Guardar Registro</button>
+                            </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+
+    function validar() {
+        var msg = "";
+        event = document.createEvent("HTMLEvents");
+        if ($("#friend_name").val() == "") {
+            msg = "Debes Seleccionar el Amigo - Visita";
+            $("#friend_name").focus();
+            sendAlert(msg, event);
+        } else if ($("#date_compromise").val() == "") {
+            msg = "Debes Ingresar la Fecha del Compromiso";
+            $("#date_compromise").focus();
+            sendAlert(msg, event);
+        } else if ($("#compromise").val() == "") {
+            msg = "Debes Ingresar el Motivo / Razón del Compromiso";
+            $("#compromise").focus();
+            sendAlert(msg, event);
+        } else {
+            addComp()
+        }
+
+    }
+
+</script>

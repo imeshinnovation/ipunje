@@ -3,7 +3,8 @@ const admins = require('../controllers/admins')
 const sucursal = require('../controllers/sucursal')
 const ccontables = require('../controllers/ccontables')
 const pcontables = require('../controllers/pcontables')
-const { EnviarCorreo, Schedule } = require('../libs/helpers')
+const diezmos = require('../controllers/diezmos')
+const { EnviarCorreo, Schedule, dnumber, daterecord } = require('../libs/helpers')
 
 //Schedule(0, 12, 10, null, null, null, 'imesh@ipunje.cl', 'Envio de Aportes Parafiscales para el 30 de este Mes, Es urgente y Prioritario')
 
@@ -156,10 +157,14 @@ Routes.get('/diezmos', async (req, res) => {
 
 Routes.get('/regdiezmos', async (req, res) => {
     if (req.session.user) {
-        const user = await admins.all()
-        const cuentas = await ccontables.all()
-        const sucursales = await sucursal.allsucursales()
-        res.render('pages/financiero/regdiezmos', { layout: false, user, cuentas, sucursales })
+        const user = await admins.one(req.session.user)
+        let alld
+        if(req.session.roll == 1){
+            alld = await diezmos.all()
+        } else {
+            alld = await diezmos.alld(req.session.user)
+        }
+        res.render('pages/financiero/regdiezmos', { layout: false, user, alld })
     } else {
         res.redirect('/login')
     }
@@ -167,11 +172,41 @@ Routes.get('/regdiezmos', async (req, res) => {
 
 Routes.get('/adddiezmo', async (req, res) => {
     if (req.session.user) {
-        const user = await admins.all()
+        const user = await admins.one(req.session.user)
         const cuentas = await ccontables.all()
         const cactivos = await pcontables.cactivos()
-        console.log(cactivos)
         res.render('pages/financiero/adddiezmo', { layout: false, user, cuentas, cactivos })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/viewdiezmo/:id?', async (req, res) => {
+    if (req.session.user) {
+        const alldata = await diezmos.one(req.params.id)
+        res.render('pages/financiero/viewdiezmo', {layout: false, alldata})
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/deldiezmo', async (req, res) => {
+    if(req.session.user){
+        res.json({'msg': await diezmos.del(req.body.id)})
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/adddiezmo', async (req, res) => {
+    if (req.session.user) {
+        const userl = await admins.one(req.session.user)
+        let body = req.body
+        body.id_pastor = req.session.user
+        body.nombre_pastor = req.session.name
+        body.date_record = daterecord()
+        await diezmos.add(body)
+        res.redirect("/financiero/diezmos")
     } else {
         res.redirect('/login')
     }
@@ -189,6 +224,16 @@ Routes.get('/regaportes', async (req, res) => {
     }
 })
 
+Routes.get('/addaporte', async (req, res) => {
+    if (req.session.user) {
+        const user = await admins.one(req.session.user)
+        const cuentas = await ccontables.all()
+        const cactivos = await pcontables.cactivos()
+        res.render('pages/financiero/addaporte', { layout: false, user, cuentas, cactivos })
+    } else {
+        res.redirect('/login')
+    }
+})
 
 
 module.exports = Routes;

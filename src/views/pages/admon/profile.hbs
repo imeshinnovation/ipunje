@@ -1,0 +1,78 @@
+{{>navbar}}
+
+<div class="container">
+    <div class="card shadow-sm">
+        <div class="card-header">Editar Mi Perfíl</div>
+        <div class="card-body">
+            <div class="row">
+                <input type="hidden" name="id" id="id" value="{{user._id}}">
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-font fa-fw me-2"></i>Nombres</div>
+                        <input type="text" name="names" id="names" class="form-control" value="{{user.names}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-font fa-fw me-2"></i>Apellidos</div>
+                        <input type="text" name="lastnames" id="lastnames" class="form-control"
+                            value="{{user.lastnames}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-id-card fa-fw me-2"></i>RUT</div>
+                        <input type="text" name="rut" id="rut" class="form-control" value="{{user.rut}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-envelope fa-fw me-2"></i>Email</div>
+                        <input type="text" name="email" id="email" class="form-control" value="{{user.email}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-phone fa-fw me-2"></i>Teléfono</div>
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{user.phonenumber}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-id-badge fa-fw me-2"></i>Licencia</div>
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{user.licencia}}" readonly>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-lock fa-fw me-2"></i>Contraseña</div>
+                        <input type="password" autocomplete="off" name="password" id="password" placeholder="Ingrese Nueva Contraseña" class="form-control" value="">
+                        <button class="btn btn-primary">Cambiar Contraseña</button>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <div class="card mb-2">
+                        <div class="card-header d-flex">
+                            <div class="me-4">
+                                <h3>Foto de Perfíl</h3>
+                            </div>
+                            <div class="btn-group d-flex justify-content-end">
+                                <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                        class="fas fa-image fa-fw" title="Cargar Fotografía"></i></button>
+                                <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                        class="fas fa-trash fa-fw" title="Borrar Fotografía"></i></button>
+                                <button type="button" onclick="saveImageProfile()" class="btn btn-info"><i
+                                        class="fas fa-save fa-fw" title="Guardar Fotografía"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0 m-0 text-center">
+                            <input class="d-none" type="file" id="formFile" onchange="preview()">
+                            <img id="frame" src="{{user.imagen64}}" class="img-fluid" />
+                            <input type="hidden" name="image64" id="image64" value="{{user.imagen64}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

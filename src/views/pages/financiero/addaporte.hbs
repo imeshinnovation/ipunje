@@ -1,9 +1,9 @@
 {{>tables}}
 
 <div class="card">
-    <div class="card-header">Nuevo Registro de Diezmos</div>
+    <div class="card-header">Nuevo Registro de Aportes</div>
     <div class="card-body">
-        <form method="post" action="/financiero/adddiezmo" autocomplete="off" id="formulario"
+        <form method="post" action="/financiero/addaporte" autocomplete="off" id="formulario"
             onsubmit="return validaForm(event);">
             <div class="row">
                 <div class="col-md-4 mb-4">
@@ -23,22 +23,22 @@
                         <label for="producto_financiero"><i class="fas fa-signature fa-fw me-2"></i>Producto Financiero</label>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 mb-4">
                     <div class="form-floating">
                         <input type="text" name="ingreso" id="ingreso" class="form-control" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                        <label for="ingreso"><i class="fas fa-dollar fa-fw me-2"></i>Ingreso</label>
+                        <label for="ingreso"><i class="fas fa-dollar fa-fw me-2"></i>Valor del Aporte</label>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="form-floating">
-                        <input type="text" name="aporte" id="aporte" class="form-control" readonly>
-                        <label for="aporte"><i class="fas fa-dollar fa-fw me-2"></i>Aporte (Diezmo + FOPS)</label>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-6 mb-4">
                     <div class="form-floating">
                         <input type="text" name="cuenta_contable" id="cuenta_contable" class="form-control" readonly>
                         <label for="cuenta_contable"><i class="fas fa-dollar fa-fw me-2"></i>Cuenta Contable</label>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-4">
+                    <div class="form-floating">
+                        <textarea class="form-control" name="description" id="description" style="height:150px;"></textarea>
+                        <label for="description"><i class="fas fa-sign fa-fw me-2"></i>Descripción</label>
                     </div>
                 </div>
                 <div class="col-md-12 mb-2">
@@ -77,16 +77,6 @@
         var month = ("0" + (now.getMonth() + 1)).slice(-2);
         var today = now.getFullYear() + "-" + month + "-" + day;
         $('#fecha_registro').val(today);
-    })
-
-    $("#ingreso").change(function () {
-        var ingreso = this.value;
-        var diezmo = ingreso * 10 / 100;
-        var postd = ingreso - diezmo;
-        var fops = postd * 7 / 100;
-        var aporte = new Intl.NumberFormat().format(parseInt(diezmo + fops));
-        $("#aporte").val(aporte);
-        this.value = new Intl.NumberFormat().format(this.value);
     })
 
     $("#producto_financiero").change(function () {

@@ -10,7 +10,7 @@ module.exports = {
         return all
     },
     one: async (id) => {
-        const oneus = await admins.findOne({_id: id})
+        const oneus = await admins.findOne({_id: id}).lean()
         return oneus
     },
     byemail: async (mail) => {
@@ -48,20 +48,7 @@ module.exports = {
         }
     },
     update: async (body) => {
-        const { id, names, lastnames, rut, email, phonenumber, roll, licencia, image64 } = body
-        const datos = {
-            names,
-            lastnames, 
-            rut, 
-            email, 
-            phonenumber, 
-            roll, 
-            licencia, 
-            imagen64: image64,
-            date_record: helpers.daterecord()
-        }
-        console.log(datos)
-        const upadm = await admins.updateOne({_id: id}, datos)
+        const upadm = await admins.updateOne({_id: body.id}, body)
         return upadm
-    }
+    },
 }

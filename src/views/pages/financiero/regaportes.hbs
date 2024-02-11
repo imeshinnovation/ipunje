@@ -1,8 +1,8 @@
 {{>tables}}
 
 <div id="tbar">
-    <button class="btn btn-secondary shadow-sm mb-2" onclick="loadContent('maindiezmos','/financiero/adddiezmos');"><i
-            class="fas fa-plus fa-fw me-2"></i>Agregar Aportes</button>
+    <button class="btn btn-secondary shadow-sm mb-2" onclick="loadContent('maindiezmos','/financiero/addaporte');"><i
+            class="fas fa-plus fa-fw me-2"></i>Nuevo Registro</button>
     <button class="btn btn-secondary shadow-sm mb-2" onclick="calcUI();"><i
             class="fas fa-calculator fa-fw me-2"></i>Calculadora</button>
 </div>
@@ -17,7 +17,6 @@
             <th data-field="fecha" data-sortable="true">Fecha</th>
             <th data-field="cantidad" data-sortable="true">Cantidad</th>
             <th data-field="descripcion" data-sortable="true">Descripción</th>
-            <th data-field="tesorero" data-sortable="true">Tesorero</th>
             <th></th>
         </tr>
     </thead>
@@ -27,7 +26,6 @@
             <td>{{fecha}}</td>
             <td>{{cantidad}}</td>
             <td>{{descripcion}}</td>
-            <td>{{tesorero}}</td>
             <td>
                 <div class="btn-group btn-secondary shadow-sm w-100">
                     <button class="btn btn-sm btn-light"

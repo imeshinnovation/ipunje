@@ -3,10 +3,29 @@ let count = 0;
 let memcalc = "";
 let memopera = "";
 
-function retrocalc(){
+function printCard(elem) {
+    let myWin = window.open("", "ipunje");
+    myWin.moveBy(0, 0);
+    myWin.resizeTo(screen.width, screen.height);
+    myWin.document.write("<html><head><title>Imprimiendo Documento</title>");
+    myWin.document.write("<link rel=\"stylesheet\" href=\"/css/bootstrap.min.css\" \>");
+    myWin.document.write("<link rel=\"stylesheet\" href=\"/css/all.css\" \>");
+    myWin.document.write("<link rel=\"stylesheet\" href=\"/css/main.css\" \>");
+    myWin.document.write("</head><body>");
+    myWin.document.write(document.getElementById(elem).innerHTML);
+    setTimeout(function () {
+        myWin.print();
+        myWin.close();
+        return true;
+    }, 1000);
+
+
+}
+
+function retrocalc() {
     let dispcalc = document.getElementById("dispcalc");
-    
-    if(dispcalc.value.length <= 1){ 
+
+    if (dispcalc.value.length <= 1) {
         dispcalc.value = "0"
     } else {
         dispcalc.value = dispcalc.value.slice(0, -1);
@@ -15,25 +34,25 @@ function retrocalc(){
 
 function addncalc(num) {
     let dispcalc = document.getElementById("dispcalc");
-    if(dispcalc.value == "0"){
+    if (dispcalc.value == "0") {
         dispcalc.value = num;
     } else {
         dispcalc.value += num;
     }
 }
 
-function operacalc(oper){
+function operacalc(oper) {
     let dispcalc = document.getElementById("dispcalc");
-    switch(oper){
+    switch (oper) {
         default:
             memcalc = dispcalc.value;
             memopera = oper;
             dispcalc.value = "0";
             break;
         case 'equal':
-            switch(memopera){
+            switch (memopera) {
                 case 'plus':
-                    dispcalc.value = ( parseInt(memcalc) + parseInt(dispcalc.value) );
+                    dispcalc.value = (parseInt(memcalc) + parseInt(dispcalc.value));
                     break;
                 case 'multi':
                     dispcalc.value = (parseInt(memcalc) * parseInt(dispcalc.value));
@@ -59,7 +78,7 @@ function clearcalc() {
     memopera = "";
 }
 
-function calcUI(){
+function calcUI() {
     const UI = `
         <div class="card border-0">
             <div class="card-body">
@@ -168,6 +187,23 @@ function remGroupF(id) {
     })
 }
 
+function remGroupA(id) {
+    const alerta = document.getElementById("alerta")
+    axios.post('/congregacional/delgroupa', { id }).then((res) => {
+        closeModal();
+        loadContent('amir', '/congregacional/grupoa');
+    })
+}
+
+function remCompromise(id) {
+    const alerta = document.getElementById("alerta")
+    axios.post('/congregacional/delcompromise', { id }).then((res) => {
+        closeModal();
+        loadContent('amir', '/congregacional/compromises');
+    })
+}
+
+
 function remMember(id) {
     const alerta = document.getElementById("alerta")
     axios.post('/congregacional/delmember', { id }).then((res) => {
@@ -224,6 +260,42 @@ function remOficial(id) {
     })
 }
 
+function remDiezmo(id) {
+    const alerta = document.getElementById("alerta")
+    axios.post('/financiero/deldiezmo', { id }).then(function (res) {
+        if (res.data.msg == 'OK') {
+            closeModal();
+            loadContent('maindiezmos', '/financiero/regdiezmos')
+        }
+    })
+}
+
+function saveImageProfile() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        imagen64: $("#image64").val()
+    }
+    axios.post('/admon/upd', datos).then(function (res) {
+        if (res.data.modifiedCount == 1) {
+            alerta.classList.add('alert-success')
+            alerta.classList.remove('alert-danger')
+            alerta.innerHTML = "Cambios Guardados con éxito!!"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios que Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    })
+}
 
 function addLicen() {
     const alerta = document.getElementById("alerta")
@@ -337,6 +409,97 @@ function updGF(id) {
     })
 }
 
+function updGA(id) {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        names: $("#names").val(),
+        sucursal: $("#sucursal").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val()
+    }
+    axios.post('/congregacional/updgroupa', datos).then((res) => {
+        if (res.data.modifiedCount == 1) {
+            loadContent('amir', '/congregacional/grupoa');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios que Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    })
+}
+
+function updM() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        names: $("#names").val(),
+        lastnames: $("#lastnames").val(),
+        typedoc: $("#typedoc").val(),
+        numdoc: $("#numdoc").val(),
+        nationality: $("#nationality").val(),
+        placeofbirth: $("#placeofbirth").val(),
+        dateofbirth: $("#dateofbirth").val(),
+        gender: $("#gender").val(),
+        address: $("#address").val(),
+        phonenumber: $("#phonenumber").val(),
+        email: $("#email").val(),
+        civilstatus: $("#civilstatus").val(),
+        id_family: $("#id_family").val(),
+        placefamily: $("#placefamily").val(),
+        scholarship: $("#scholarship").val(),
+        congregation: $("#congregation").val(),
+        occupation: $("#occupation").val(),
+        datewaterbaptism: $("#datewaterbaptism").val(),
+        citybaptism: $("#citybaptism").val(),
+        shepherdbaptism: $("#sheperdbaptism").val(),
+        holyspirit: $("#holyspirit").val(),
+        positionsheld: $("#positionsheld").val(),
+        howmeetlord: $("#howmeetlord").val(),
+        addnote: $("#addnote").val(),
+        photo: $("#image64").val()
+    }
+    axios.post('/congregacional/updmember', datos).then((res) => {
+        if (res.data.modifiedCount == 1) {
+            loadContent('memr', '/congregacional/members');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios que Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    })
+}
+
+function updComp(id) {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        date_compromise: $("#date_compromise").val(),
+        compromise: $("#compromise").val(),
+    }
+    axios.post('/congregacional/updcompromise', datos).then((res) => {
+        if (res.data.modifiedCount == 1) {
+            loadContent('amir', '/congregacional/compromises');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios que Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    })
+}
+
 function addGF() {
     const alerta = document.getElementById("alerta")
     const datos = {
@@ -366,6 +529,70 @@ function addGF() {
     })
 }
 
+function addGA() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        names: $("#names").val(),
+        sucursal: $("#sucursal").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val()
+    }
+    axios.post('/congregacional/addgroupa', datos).then(function (res) {
+        if (res.data.msg == 'OK') {
+            loadContent('amir', '/congregacional/grupoa');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "Error en el Registro"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    }).catch(function (err) {
+        alerta.classList.add('alert-danger')
+        alerta.classList.remove('alert-success')
+        alerta.innerHTML = "Error en el Registro"
+        $("#alerta").slideDown(500)
+        setTimeout(function () {
+            $("#alerta").slideUp(500)
+        }, 1000)
+    })
+}
+
+function addComp() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        friend_name: $("#friend_name").val(),
+        sucursal: $("#sucursal").val(),
+        my_email: $("#my_email").val(),
+        my_name: $("#my_name").val(),
+        compromise: $("#compromise").val(),
+        date_compromise: $("#date_compromise").val(),
+        status: 0
+    }
+    axios.post('/congregacional/addcompromise', datos).then(function (res) {
+        if (res.data.msg == 'OK') {
+            loadContent('amir', '/congregacional/compromises');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "Error en el Registro"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    }).catch(function (err) {
+        alerta.classList.add('alert-danger')
+        alerta.classList.remove('alert-success')
+        alerta.innerHTML = "Error en el Registro"
+        $("#alerta").slideDown(500)
+        setTimeout(function () {
+            $("#alerta").slideUp(500)
+        }, 1000)
+    })
+}
 
 function loginstep() {
     const email = document.getElementById("email")
@@ -547,8 +774,10 @@ async function uploadImage(event) {
     $("#image64").val(base64);
 };
 
-function preview() {
+async function preview() {
     frame.src = URL.createObjectURL(event.target.files[0]);
+    const base64 = await convertBase64(event.target.files[0]);
+    $("#image64").val(base64);
 }
 function clearImage() {
     document.getElementById('formFile').value = null;
@@ -559,7 +788,7 @@ function openFile() {
 }
 
 function sendAlert(msg, evento) {
-    if(typeof(evento) !== "undefined"){
+    if (typeof (evento) !== "undefined") {
         evento.preventDefault();
     }
     alerta.classList.add('alert-danger');
