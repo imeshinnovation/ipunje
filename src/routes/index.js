@@ -25,6 +25,11 @@ Routes.get('/login', async (req, res) => {
     res.render('pages/login', { user })
 })
 
+Routes.get('/logout', async (req, res) => {
+    req.session.destroy()
+    res.redirect('/login')
+})
+
 Routes.post('/login', async (req, res) => {
     const { email, password, a2f } = req.body
     const verify = await codes.verify(email, a2f)

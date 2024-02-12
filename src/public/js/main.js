@@ -178,6 +178,13 @@ function remProd(id) {
     })
 }
 
+function remTraspaso(id) {
+    const alerta = document.getElementById("alerta")
+    axios.post('/congregacional/deltraspaso', { id }).then((res) => {
+        closeModal();
+        loadContent('maintras', '/congregacional/traspinv');
+    })
+}
 
 function remGroupF(id) {
     const alerta = document.getElementById("alerta")
@@ -270,6 +277,99 @@ function remDiezmo(id) {
     })
 }
 
+function getProdX(sucursal){
+    const pro = new Promise((resolve) => {
+        axios.post('/congregacional/getproductos', { sucursal }).then(function(res){
+            resolve(res.data)
+        })
+        
+        return resolve
+    })
+    return pro
+}
+
+function saveTras(){
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        producto: $("#producto option:selected").text(),
+        cantidad: parseInt($("#cantidad").val()),
+        sucursal_origen: $("#sucursal_origen").val(),
+        sucursal_destino: $("#sucursal_destino").val(),
+        description: $("#description").val(),
+        autorization: $("#autorization").val()
+    }
+    axios.post('/congregacional/addtrasp', datos).then(function (res) {
+        if (res.data.msg == 'OK') {
+            loadContent('maintras', '/congregacional/traspinv');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "Error en el Registro"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    }).catch(function (err) {
+        alerta.classList.add('alert-danger')
+        alerta.classList.remove('alert-success')
+        alerta.innerHTML = "Error en el Registro"
+        $("#alerta").slideDown(500)
+        setTimeout(function () {
+            $("#alerta").slideUp(500)
+        }, 1000)
+    })
+}
+
+function getCantidadX(id){
+    const pro = new Promise((resolve) => {
+        axios.post('/congregacional/getcantidad', { id }).then(function(res){
+            resolve(res.data)
+        })
+        return resolve
+    })
+    return pro
+}
+
+function remRegistro(id) {
+    const alerta = document.getElementById("alerta")
+    axios.post('/congregacional/delregistro', { id }).then(function (res) {
+        if (res.data.msg == 'OK') {
+            closeModal();
+            loadContent('maininventario', '/congregacional/registroinv');
+        }
+    })
+}
+
+function changePass() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        passwt: $("#passwt").val(),
+        act: 1
+    }
+    axios.post('/admon/upd', datos).then(function (res) {
+        if (res.data.modifiedCount == 1) {
+            alerta.classList.add('alert-success')
+            alerta.classList.remove('alert-danger')
+            alerta.innerHTML = "Cambios Guardados con éxito!!"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+                location.href = '/logout';
+            }, 1000)
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios que Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    })
+}
+
 function saveImageProfile() {
     const alerta = document.getElementById("alerta")
     const datos = {
@@ -294,6 +394,84 @@ function saveImageProfile() {
                 $("#alerta").slideUp(500)
             }, 1000)
         }
+    })
+}
+
+async function getProd(id){
+   const datos = await axios.post('/financiero/getprod', { id })
+   return datos.data.code_name
+}
+
+function saveRegistro() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        producto: $("#producto").val(),
+        cantidad: parseInt($("#cantidad").val()),
+        costo_unitario: parseInt($("#costo_unitario").val()),
+        costo_total: parseInt($("#costo_total").val()),
+        description: $("#description").val(),
+        status: $("#status").val(),
+        producto_contable: $("#producto_contable").val(),
+        sucursal: $("#sucursal").val(),
+        factura_fisica: $("#image64").val()
+    }
+    axios.post('/congregacional/addregistro', datos).then(function (res) {
+        if (res.data.msg == 'OK') {
+            loadContent('maininventario', '/congregacional/registroinv');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "Error en el Registro"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    }).catch(function (err) {
+        alerta.classList.add('alert-danger')
+        alerta.classList.remove('alert-success')
+        alerta.innerHTML = "Error en el Registro"
+        $("#alerta").slideDown(500)
+        setTimeout(function () {
+            $("#alerta").slideUp(500)
+        }, 1000)
+    })
+}
+
+function updRegistro() {
+    const alerta = document.getElementById("alerta")
+    const datos = {
+        id: $("#id").val(),
+        producto: $("#producto").val(),
+        cantidad: parseInt($("#cantidad").val()),
+        costo_unitario: parseInt($("#costo_unitario").val()),
+        costo_total: parseInt($("#costo_total").val()),
+        description: $("#description").val(),
+        status: $("#status").val(),
+        producto_contable: $("#producto_contable").val(),
+        sucursal: $("#sucursal").val(),
+        factura_fisica: $("#image64").val()
+    }
+    axios.post('/congregacional/updregistro', datos).then(function (res) {
+        if (res.data.modifiedCount == 1) {
+            loadContent('maininventario', '/congregacional/registroinv');
+        } else {
+            alerta.classList.add('alert-danger')
+            alerta.classList.remove('alert-success')
+            alerta.innerHTML = "No hay Cambios para Guardar"
+            $("#alerta").slideDown(500)
+            setTimeout(function () {
+                $("#alerta").slideUp(500)
+            }, 1000)
+        }
+    }).catch(function (err) {
+        alerta.classList.add('alert-danger')
+        alerta.classList.remove('alert-success')
+        alerta.innerHTML = "Error en el Registro: " + err
+        $("#alerta").slideDown(500)
+        setTimeout(function () {
+            $("#alerta").slideUp(500)
+        }, 1000)
     })
 }
 

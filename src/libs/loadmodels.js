@@ -12,6 +12,8 @@ const pcontables = require('../models/pcontables');
 const diezmos = require('../models/diezmos');
 const friends = require('../models/friends');
 const compromises = require('../models/compromise');
+const inventario = require('../models/inventario');
+const traspaso = require('../models/traspaso');
 
 module.exports = { 
     white, 
@@ -27,5 +29,7 @@ module.exports = {
     pcontables, 
     diezmos, 
     friends, 
-    compromises
+    compromises,
+    inventario,
+    traspaso
 };

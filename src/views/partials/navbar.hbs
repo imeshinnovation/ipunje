@@ -85,7 +85,7 @@
             <button type="button" class="btn btn-light shadow-sm w-100 mb-1"
               onclick="loadPage('/congregacional/inventario');">Activos</button>
               {{#if (eq myuser.roll 1)}}
-            <button type="button" class="btn btn-light shadow-sm w-100 mb-1">Traspaso</button>{{/if}}
+            <button type="button" class="btn btn-light shadow-sm w-100 mb-1" onclick="loadPage('/congregacional/traspaso');">Traspaso</button>{{/if}}
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@
       {{#if (eq myuser.roll 1)}}
       <button type="button" class="btn btn-light" onclick="location.href='/admon/';"><i
           class="fas fa-cog fa-fw me-2"></i>Administración</button>{{/if}}
-      <button class="btn btn-light" onclick="location.href='/login'"><i
+      <button class="btn btn-light" onclick="location.href='/logout'"><i
           class="fas fa-right-from-bracket fa-fw me-2"></i>Salir</button>
     </div>
 

@@ -110,6 +110,13 @@ const Helpers = {
         return 'Error';
         break;
     }
+  },
+  formatCurrency: (v1) => {
+    let CLP = new Intl.NumberFormat('es-CL', {
+      style: 'currency',
+      currency: 'CLP',
+    })
+    return CLP.format(v1)
   }
 }
 

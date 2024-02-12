@@ -6,29 +6,27 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a aria-current="page" href="#" data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">Inicio</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Inventario</li>
+            <li class="breadcrumb-item active" aria-current="page">Traspasos</li>
         </ol>
     </nav>
 
     <div class="card">
-        <div class="card-header">Inventario de la Congregación</div>
+        <div class="card-header">Gestión de Traspaso del Inventario</div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-3 mb-2">
-                    <div class="card border-0 w-100 mb-3">
+                    <div class="card border-0 w-100">
                         <div class="card-body">
                             <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
-                                onclick="loadContent('maininventario','/congregacional/registroinv');"><i
-                                    class="fas fa-cart-plus fa-fw me-2"></i>Registro</button>
-                            <button class="btn btn-light mb-2 w-100 text-start shadow-sm"
-                                onclick="loadContent('maininventario','/congregacional/resumeninv');"><i
-                                    class="fas fa-link fa-fw me-2"></i>Resumen Inventario</button>
+                                onclick="loadContent('maintras','/congregacional/traspinv');"><i
+                                    class="fas fa-arrow-right-arrow-left fa-fw me-2"></i>Traspasos</button>
+                            
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9 mb-2">
                     <div class="card border-0 w-100 mb-3">
-                        <div class="card-body p-1" id="maininventario"></div>
+                        <div class="card-body p-1" id="maintras"></div>
                     </div>
                 </div>
             </div>
@@ -38,6 +36,6 @@
 
 <script>
     $(document).ready(function () {
-        $("#maininventario").load('/congregacional/registroinv').fadeIn('500');
+        $("#maintras").load('/congregacional/traspinv').fadeIn('500');
     });
 </script>

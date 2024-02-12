@@ -40,6 +40,14 @@ Routes.get('/cuentas', async (req, res) => {
     }
 })
 
+Routes.post('/getprod', async (req, res) => {
+    if (req.session.user) {
+        res.json(await pcontables.one(req.body.id))
+    } else {
+        res.redirect('/login')
+    }
+})
+
 Routes.get('/prodfin', async (req, res) => {
     if (req.session.user) {
         const user = await admins.all()

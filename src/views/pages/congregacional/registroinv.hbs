@@ -1,0 +1,53 @@
+{{>tables}}
+
+<div class="card border-0 mb-4">
+    <div class="card-body">
+        <div id="tbar">
+            <button class="btn btn-secondary shadow-sm mb-3"
+                onclick="loadContent('maininventario','/congregacional/addregistro');"><i class="fas fa-plus fa-fw me-2"></i>Agregar
+                Registro al Inventario</button>
+        </div>
+        <table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true"
+            data-search="true" data-show-jump-to="true" data-page-size='10' data-show-export="true" data-export-types="['csv','']" data-mobile-responsive="true" data-check-on-init="true"
+            data-click-to-select="true" data-toolbar="#toolbar" class="table table-striped table-bordered table-sm"
+            data-page-list="[50, 100, 200, All]" width="100%" id="dtable"
+            class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th data-field="producto" data-sortable="true">Producto</th>
+                    <th data-field="cantidad" data-sortable="true">Cantidad</th>
+                    <th data-field="costo" data-sortable="true">Costo</th>
+                    <th data-field="estado" data-sortable="true">Estado</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each invent}}
+                <tr>
+                    <td>{{producto}}</td>
+                    <td>{{cantidad}}</td>
+                    <td>{{formatCurrency costo_total}}</td>
+                    <td>{{#if (eq status 1)}}Activo{{else if (eq status 2)}}Depreciado{{else}}De Baja{{/if}}</td>
+                    <td>
+                        <div class="btn-group btn-secondary shadow-sm w-100">
+                            <button class="btn btn-sm btn-light" title="Ver"
+                                onclick="loadContent('maininventario', '/congregacional/viewregistro/{{_id}}')"><i
+                                    class="fas fa-eye fa-fw"></i></button>
+                            <button class="btn btn-sm btn-light" title="Editar"
+                            {{#if (eq ../myuser.roll 1)}}
+                                onclick="loadContent('maininventario','/congregacional/editregistro/{{_id}}')"><i
+                                    class="fas fa-pen fa-fw"></i></button>
+                            
+                            <button class="btn btn-sm btn-light" title="Eliminar" onclick="delDialog('{{_id}}','{{producto}}','remRegistro','Eliminar Producto del Inventario');"><i
+                                    class="fas fa-trash fa-fw"></i></button>
+                            {{/if}}
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{>end}}

@@ -1,0 +1,46 @@
+{{>tables}}
+
+<div class="card border-0 mb-4">
+    <div class="card-body">
+        <div id="tbar">
+            <button class="btn btn-secondary shadow-sm mb-3"
+                onclick="loadContent('maintras','/congregacional/addtraspaso');"><i class="fas fa-plus fa-fw me-2"></i>Nuevo Traspaso</button>
+        </div>
+        <table data-toggle="table" data-toolbar="#tbar" data-show-columns="false" data-pagination="true"
+            data-search="true" data-show-jump-to="true" data-page-size='50' data-show-export="true" data-export-types="['csv','']" data-mobile-responsive="true" data-check-on-init="true"
+            data-click-to-select="true" data-toolbar="#toolbar" class="table table-striped table-bordered table-sm"
+            data-page-list="[50, 100, 200, All]" width="100%" id="dtable"
+            class="table table-striped table-bordered table-responsive mt-3 shadow-sm">
+            <thead class="table-light">
+                <tr>
+                    <th data-field="producto" data-sortable="true">Producto</th>
+                    <th data-field="cantidad" data-sortable="true">Cantidad</th>
+                    <th data-field="sucursal_origen" data-sortable="true">Origen</th>
+                    <th data-field="sucursal_destino" data-sortable="true">Destino</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each trasp}}
+                <tr>
+                    <td>{{producto}}</td>
+                    <td>{{cantidad}}</td>
+                    <td>{{sucursal_origen}}</td>
+                    <td>{{sucursal_destino}}</td>
+                    <td>
+                        <div class="btn-group btn-secondary shadow-sm w-100">
+                            <button class="btn btn-sm btn-light" title="Ver"
+                                onclick="loadContent('maintras', '/congregacional/viewtraspaso/{{_id}}')"><i
+                                    class="fas fa-eye fa-fw"></i></button>
+                            <button class="btn btn-sm btn-light" title="Eliminar" onclick="delDialog('{{_id}}','{{producto}}','remTraspaso','Eliminar Traspaso del Inventario');"><i
+                                    class="fas fa-trash fa-fw"></i></button>
+                        </div>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{>end}}

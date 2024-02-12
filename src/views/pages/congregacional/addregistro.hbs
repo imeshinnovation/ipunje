@@ -1,0 +1,108 @@
+<div class="card shadow bg-white mt-2">
+    <div class="card-header">Agregar Nuevo Registro al Inventario</div>
+    <div class="card-body">
+        <div class="card border-0 p-0 mt-2">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-store fa-fw me-2"></i>Producto</div>
+                            <input type="text" name="producto" id="producto" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Cantidad</div>
+                            <input type="number" name="cantidad" id="cantidad" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-money-bill-1-wave fa-fw me-2"></i>Costo
+                                Unitario
+                            </div>
+                            <input type="text" name="costo_unitario" id="costo_unitario" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-money-bill-1 fa-fw me-2"></i>Costo Total
+                            </div>
+                            <input type="text" name="costo_total" id="costo_total" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-font-awesome fa-fw me-2"></i>Estado</div>
+                            <select class="form-select" name="status" id="status" required>
+                                <option value="">Seleccione...</option>
+                                <option value="1">Activo</option>
+                                <option value="2">Depreciado</option>
+                                <option value="3">De Baja</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-file-signature fa-fw me-2"></i>Producto
+                                Contable</div>
+                            <select class="form-select" name="producto_contable" id="producto_contable" required>
+                                <option value="">Seleccione...</option>
+                                {{#each pcontable}}
+                                <option value="{{_id}}">{{code_name}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-file-signature fa-fw me-2"></i>Descripción
+                            </div>
+                            <textarea class="form-control" id="description" rows="5"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <div class="card mb-2">
+                            <div class="card-header d-flex">
+                                <div class="me-4">
+                                    <h3>Imágen Factura Física</h3>
+                                </div>
+                                <div class="btn-group d-flex justify-content-end">
+                                    <button type="button" onclick="openFile()" class="btn btn-success"><i
+                                            class="fas fa-image fa-fw" title="Cargar Factura"></i></button>
+                                    <button type="button" onclick="clearImage()" class="btn btn-primary"><i
+                                            class="fas fa-trash fa-fw" title="Borrar Factura"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0 m-0 text-center">
+                                <input class="d-none" type="file" id="formFile" onchange="preview()">
+                                <img id="frame" class="img-fluid" />
+                                <input type="hidden" id="image64">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <input type="hidden" id="sucursal" value="{{sucursal}}">
+                        <button class="btn btn-success shadow-sm" onclick="saveRegistro()"><i
+                                class="fas fa-save fa-fw me-2"></i>Guardar Registro</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        let CLP = new Intl.NumberFormat('es-CL', {
+            style: 'currency',
+            currency: 'CLP',
+        });
+
+        $("#costo_unitario").on("change", function () {
+            $("#costo_total").val(parseInt($(this).val()) * parseInt($("#cantidad").val()))
+            //$(this).val(CLP.format($(this).val()))
+        })
+    });
+</script>

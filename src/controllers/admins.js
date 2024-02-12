@@ -48,6 +48,11 @@ module.exports = {
         }
     },
     update: async (body) => {
+        if(body.act == 1){
+            body.password = createHmac('sha256', secret)
+            .update(body.passwt)
+            .digest('hex')
+        }
         const upadm = await admins.updateOne({_id: body.id}, body)
         return upadm
     },

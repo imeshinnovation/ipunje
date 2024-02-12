@@ -7,8 +7,10 @@ const friends = require('../controllers/friends')
 const compromises = require('../controllers/compromises')
 const csv = require('csvtojson')
 const { EnviarCorreo } = require('../libs/helpers')
-
+const pcontables = require('../controllers/pcontables')
 const sucursal = require('../controllers/sucursal')
+const inventario = require('../controllers/inventario')
+const traspaso = require('../controllers/traspaso')
 
 Routes.get('/membresia', async (req, res) => {
     if (req.session.user) {
@@ -377,6 +379,172 @@ Routes.get('/agendag', async (req, res) => {
     }
 })
 
+Routes.get('/registroinv', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const invent = await inventario.all()
+        res.render('pages/congregacional/registroinv', { layout: false, user, myuser, invent })
+    } else {
+        res.redirect('/login')
+    }
+})
 
+Routes.get('/resumeninv', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const invent = await inventario.all()
+        const total = await inventario.grantotalsuc({sucursal: req.session.sucursal})
+        res.render('pages/congregacional/resumeninv', { layout: false, user, myuser, invent, total })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/editregistro/:id?', async (req, res) => {
+    if (req.session.user) {
+        const data = await inventario.one(req.params)
+        const pcontable = await pcontables.all()
+        const sucursal = req.session.sucursal
+        res.render('pages/congregacional/editregistro', { layout: false, data, pcontable, sucursal })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/viewregistro/:id?', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const regi = await inventario.one(req.params)
+        res.render('pages/congregacional/viewregistro', { layout: false, user, regi })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/addregistro', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const pcontable = await pcontables.all()
+        const sucursal = req.session.sucursal
+        res.render('pages/congregacional/addregistro', { layout: false, user, myuser, pcontable, sucursal })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/addregistro', async (req, res) => {
+    if (req.session.user) {
+        const dsuc = await inventario.add(req.body)
+        res.json(dsuc)
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/updregistro', async (req, res) => {
+    if (req.session.user) {
+        const dsuc = await inventario.upd(req.body)
+        res.json(dsuc)
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/delregistro', async (req, res) => {
+    if (req.session.user) {
+        const dsuc = await inventario.del(req.body)
+        res.json(dsuc)
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/resumeninv', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const invent = await inventario.all()
+        const total = await inventario.grantotalsuc({sucursal: req.session.sucursal})
+        res.render('pages/congregacional/resumeninv', { layout: false, user, myuser, invent, total })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/traspaso', async (req, res) => {
+    if (req.session.user) {
+        const user = await users.allusers()
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        res.render('pages/congregacional/traspaso', { user, myuser })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/traspinv', async (req, res) => {
+    if (req.session.user) {
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const trasp = await traspaso.all()
+        res.render('pages/congregacional/traspinv', { layout: false, myuser, trasp })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/addtraspaso', async (req, res) => {
+    if (req.session.user) {
+        const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
+        const invent = await inventario.all()
+        const sucur = await sucursal.allsucursales()
+        res.render('pages/congregacional/addtraspaso', { layout: false, myuser, invent, sucur })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/getproductos', async (req, res) => {
+    if (req.session.user) {
+        res.json(await inventario.allsucursal(req.body))
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/getcantidad', async (req, res) => {
+    if (req.session.user) {
+        res.json(await inventario.getcant(req.body))
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/addtrasp', async (req, res) => {
+    if (req.session.user) {
+        res.json(await traspaso.add(req.body))
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.get('/viewtraspaso/:id?', async (req, res) => {
+    if (req.session.user) {
+        const trasp = await traspaso.one(req.params)
+        res.render('pages/congregacional/viewtraspaso', { layout: false, trasp })
+    } else {
+        res.redirect('/login')
+    }
+})
+
+Routes.post('/deltraspaso', async (req, res) => {
+    if (req.session.user) {
+        const dsuc = await traspaso.del(req.body)
+        res.json(dsuc)
+    } else {
+        res.redirect('/login')
+    }
+})
 
 module.exports = Routes

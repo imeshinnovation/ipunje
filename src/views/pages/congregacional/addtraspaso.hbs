@@ -1,0 +1,91 @@
+<div class="card shadow bg-white mt-2">
+    <div class="card-header">Agregar Nuevo Traspaso de Inventario</div>
+    <div class="card-body">
+        <div class="card border-0 p-0 mt-2">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-arrow-left fa-fw me-2"></i>Sucursal de Origen
+                            </div>
+                            <select id="sucursal_origen" class="form-select" required>
+                                <option value="">Selecciona...</option>
+                                {{#each sucur}}
+                                <option value="{{nombre_sucursal}}">{{nombre_sucursal}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3" id="productos"></div>
+                    <div class="col-md-12 mb-3" id="cantidades"></div>
+                    <div class="col-md-12 mb-3" id="destino"></div>
+                    <div class="col-md-12 mb-3" id="autorizador"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $("#sucursal_origen").on("change", async function () {
+            let pr = await getProdX($(this).val())
+            $("#productos").html(`
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-cogs fa-fw me-2"></i>Productos</div>
+                    <select id="producto" class="form-select">
+                        <option value="">Seleccione...</option>`
+                +
+                pr.map((value, id) => {
+                    return `
+                                <option key="${id}" value="${value._id}">${value.producto}</option>
+                            `
+                })
+                +
+                `</select>
+                </div>
+            `)
+
+            $("#producto").on("change", async function () {
+                let cr = await getCantidadX($(this).val())
+                $("#cantidades").html(`
+                    <div class="input-group shadow-sm">
+                        <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Cantidad</div>
+                        <input type="text" id="cantidad" value="${cr[0].cantidad}" class="form-control">
+                    </div>
+                `)
+
+                $("#destino").html(`
+                <div class="input-group shadow-sm">
+                    <div class="input-group-text"><i class="fas fa-arrow-right fa-fw me-2"></i>Sucursal de Destino</div>
+                    <select id="sucursal_destino" class="form-select">
+                        <option value="">Seleccione...</option>
+                        {{#each sucur}}
+                            <option value="{{nombre_sucursal}}">{{nombre_sucursal}}</option>
+                        {{/each}}
+                    </select>
+                </div>`)
+
+                $("#autorizador").html(`
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header"><i class="fas fa-font fa-fw me-2"></i>Descripción</div>
+                    <div class="card-body p-1">
+                        <textarea id="description" class="form-control" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="input-group shadow-sm mb-3">
+                    <div class="input-group-text"><i class="fas fa-signature fa-fw me-2"></i>Autorizado por</div>
+                    <input type="text" class="form-control" id="autorization" >
+                </div>
+                <button class="btn btn-success" onclick="saveTras()"><i class="fas fa-save fa-fw me-2"></i>Guardar Traspaso</button>
+                `) 
+            })
+
+        })
+
+
+
+    });
+</script>

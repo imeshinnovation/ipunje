@@ -1,0 +1,54 @@
+<div class="card shadow bg-white mt-2">
+    <div class="card-header">Agregar Nuevo Traspaso de Inventario</div>
+    <div class="card-body">
+        <div class="card border-0 p-0 mt-2">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-arrow-left fa-fw me-2"></i>Sucursal Origen
+                            </div>
+                            <input type="text" value="{{trasp.sucursal_origen}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-arrow-right fa-fw me-2"></i>Sucursal Destino
+                            </div>
+                            <input type="text" value="{{trasp.sucursal_destino}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-cogs fa-fw me-2"></i>Producto
+                            </div>
+                            <input type="text" value="{{trasp.producto}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-hashtag fa-fw me-2"></i>Cantidad
+                            </div>
+                            <input type="text" value="{{trasp.cantidad}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header"><i class="fas fa-font fa-fw me-2"></i>Descripción</div>
+                            <div class="card-body p-1">
+                                <textarea class="form-control" rows="5" readonly>{{trasp.description}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group shadow-sm">
+                            <div class="input-group-text"><i class="fas fa-signature fa-fw me-2"></i>Autorizado por:
+                            </div>
+                            <input type="text" value="{{trasp.autorization}}" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
