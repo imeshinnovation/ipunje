@@ -7,7 +7,7 @@ module.exports = {
         let registro
         const lastreg = await diezmos.findOne({}).sort({code: -1 }).lean()
         if(lastreg.code) {
-            console.log(lastreg.code);
+            //console.log(lastreg.code);
             const proce = parseInt(String(lastreg.code).slice(1))
             registro = dnumber('D', (proce + 1))
         } else {

@@ -5,7 +5,7 @@ const { users } = require('../libs/loadmodels');
 Routes.post('/login', async (req, res) => {
 	const datos = { email, password } = req.body
 	const user = await users.findOne({ email })
-	console.log(secure.encryptPassword(password))
+	//console.log(secure.encryptPassword(password))
 	if (user) {
 		if (secure.comparePassword(password, user.password)) {
 			secure.encode(user).then((result) => {

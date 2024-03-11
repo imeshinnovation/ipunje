@@ -83,7 +83,7 @@ const Helpers = {
     return v3.trim();
   },
   dnumber: (prefix, num) => {
-    console.log('Size Code:', String(num).length);
+    //console.log('Size Code:', String(num).length);
     switch(true) {
       case String(num).length === 1:
         return prefix + '000000' + num;
