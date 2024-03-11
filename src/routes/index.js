@@ -42,11 +42,15 @@ Routes.post('/login', async (req, res) => {
         if (prepass.trim() == user.password.trim()) {
             req.session.regenerate(async function (err) {
                 if (err) next(err)
+                try {
                 req.session.user = user._id
                 req.session.name = user.names + ' ' + user.lastnames
                 req.session.roll = user.roll
                 req.session.sucursal = sucursal.nombre_sucursal
                 req.session.save()
+                } catch {
+                    console.log('')
+                }
                 await codes.remove(email)
                 res.json({ 'msg': 1 })
             })
