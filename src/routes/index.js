@@ -1,5 +1,6 @@
 const Routes = require('express').Router()
 const users = require('../controllers/users')
+const familys = require('../controllers/family')
 const admins = require('../controllers/admins')
 const sucursales = require('../controllers/sucursal')
 const codes = require('../controllers/codes')
@@ -14,7 +15,8 @@ Routes.get('/', async (req, res) => {
         const user = await users.allusers()
         const myuser = JSON.parse(JSON.stringify(await admins.one(req.session.user)))
         const member = await users.count()
-        res.render('index', { user, myuser, member })
+        const familys = await familys.count()
+        res.render('index', { user, myuser, member, familys })
     } else {
         res.redirect('/login')
     }
